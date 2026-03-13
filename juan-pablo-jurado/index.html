@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title id="page-title">Tarjeta Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { fondoDark: '#121212', oro: '#E9CE3F', oroOscuro: '#B59B27' },
+                    fontFamily: { serif: ['Cinzel', 'serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { 
+            font-family: 'Cinzel', serif; 
+            background-color: #121212; 
+        }
+        
+        /* Pantalla de Carga (Throbber) */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #121212;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: opacity 0.6s ease;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(233, 206, 63, 0.1);
+            border-top: 3px solid #E9CE3F;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Estilo de Botones Redondos Elegantes */
+        .btn-social {
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            border: 1px solid rgba(233, 206, 63, 0.2);
+            box-shadow: 4px 4px 8px #080808, -2px -2px 6px #1c1c1c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .btn-social:active {
+            box-shadow: inset 2px 2px 5px #080808, inset -2px -2px 5px #1c1c1c;
+            transform: scale(0.95);
+        }
+        .btn-social svg { filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.5)); }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        #main-card { opacity: 0; transition: opacity 0.8s ease; }
+        #main-card.loaded { opacity: 1; }
+    </style>
+</head>
+<body class="h-[100dvh] flex items-center justify-center p-4 relative overflow-hidden text-white">
+
+    <div id="loader">
+        <div class="spinner mb-4"></div>
+        <p class="text-oro text-[0.6rem] tracking-[0.3em] uppercase">Sincronizando Perfil...</p>
+    </div>
+
+    <div id="main-card" class="relative z-10 w-full max-w-sm h-full max-h-[850px] bg-transparent p-6 flex flex-col items-center overflow-y-auto no-scrollbar">
+        
+        <div class="absolute top-2 right-2 flex gap-4 z-20">
+            <button onclick="toggleQR()" class="text-oro/60 hover:text-oro transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path></svg></button>
+            <button onclick="compartirPerfil()" class="text-oro/60 hover:text-oro transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg></button>
+        </div>
+
+        <div class="mt-2 mb-4">
+            <svg class="w-20 h-20 text-oro" viewBox="0 0 100 100" fill="currentColor">
+                <path d="M 30 88 L 70 88 L 73 94 L 27 94 Z" /><path d="M 35 82 L 65 82 L 68 88 L 32 88 Z" /><path d="M 42 76 L 58 76 L 61 82 L 39 82 Z" /><rect x="47" y="20" width="6" height="56" /><polygon points="50,8 43,20 57,20" /><rect x="15" y="22" width="70" height="3" rx="1.5" />
+                <line x1="17" y1="24" x2="5" y2="55" stroke="currentColor" stroke-width="1.5" /><line x1="17" y1="24" x2="17" y2="55" stroke="currentColor" stroke-width="1.5" /><line x1="17" y1="24" x2="29" y2="55" stroke="currentColor" stroke-width="1.5" /><path d="M 3 55 Q 17 68 31 55 Z" />
+                <line x1="83" y1="24" x2="71" y2="55" stroke="currentColor" stroke-width="1.5" /><line x1="83" y1="24" x2="83" y2="55" stroke="currentColor" stroke-width="1.5" /><line x1="83" y1="24" x2="95" y2="55" stroke="currentColor" stroke-width="1.5" /><path d="M 69 55 Q 83 68 97 55 Z" />
+            </svg>
+        </div>
+
+        <div class="text-center w-full z-10">
+            <h1 id="user-name" class="text-xl sm:text-2xl font-bold tracking-wider text-oro uppercase mb-1"></h1>
+            <p id="user-title" class="text-[0.65rem] tracking-[0.3em] text-oro/80 uppercase font-medium border-b border-oro/20 pb-4 inline-block px-6"></p>
+            <p id="user-desc" class="text-gray-400 font-sans text-[0.7rem] mt-5 whitespace-pre-line leading-relaxed px-2"></p> 
+        </div>
+
+        <div class="relative flex-shrink-0 mt-8 mb-8">
+            <div class="w-40 h-40 rounded-full p-[3px] bg-gradient-to-tr from-oroOscuro via-oro to-oroOscuro shadow-[0_0_25px_rgba(233,206,63,0.15)] z-10 relative">
+                <div class="w-full h-full rounded-full overflow-hidden border-[4px] border-fondoDark bg-fondoDark">
+                    <img id="profile-img" src="" alt="" class="w-full h-full object-cover grayscale-[20%]">
+                </div>
+            </div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[125%] h-[125%] border border-white/[0.03] rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6 w-fit mx-auto z-10 mb-10">
+            <a id="link-phone" href="#" class="btn-social w-14 h-14 rounded-full text-oro">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20.005 15.304c-.392-.315-2.28-1.05-2.633-1.168-.352-.12-.607-.175-.862.197-.254.372-1.002 1.168-1.228 1.408-.225.24-.45.27-.843.075-3.033-1.503-4.832-3.15-6.195-5.46-.196-.334.205-.308.58-.98.118-.21.06-.394-.03-.584-.09-.19-.86-2.072-1.18-2.838-.31-.747-.625-.646-.86-.658-.226-.01-.484-.012-.74-.012-.254 0-.668.095-1.018.475C4.1 6.556 3 7.818 3 10.3c0 2.484 2.152 4.887 2.45 5.285.297.397 3.52 5.518 8.653 7.606 3.036 1.233 4.295 1.05 5.092.905.908-.166 2.28-.934 2.6-1.838.32-.904.32-1.68.225-1.838-.095-.157-.35-.252-.743-.448z"/></svg>
+            </a>
+            <a id="link-whatsapp" href="#" target="_blank" class="btn-social w-14 h-14 rounded-full text-oro">
+                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.39 0 .004 5.385.004 12.025c0 2.126.552 4.195 1.6 6.01L.067 23.99l6.103-1.601c1.748.951 3.733 1.453 5.86 1.453 6.638 0 12.025-5.385 12.025-12.025S18.669 0 12.031 0zm0 19.957c-1.793 0-3.548-.482-5.088-1.395l-.364-.216-3.778.991.999-3.684-.236-.376c-1.002-1.597-1.531-3.444-1.531-5.341 0-5.548 4.515-10.063 10.063-10.063 5.547 0 10.062 4.515 10.062 10.063 0 5.548-4.515 10.063-10.062 10.063zm5.525-7.555c-.303-.152-1.794-.886-2.072-.988-.278-.102-.482-.152-.685.152-.204.303-.785.988-.962 1.19-.178.203-.355.228-.659.076-.303-.152-1.282-.473-2.44-1.512-.903-.81-1.511-1.812-1.689-2.116-.178-.304-.019-.468.133-.62.137-.137.303-.356.455-.534.152-.178.203-.304.304-.507.102-.203.051-.38-.025-.533-.076-.152-.685-1.65-.938-2.261-.247-.594-.496-.513-.685-.523-.178-.009-.381-.01-.584-.01s-.532.076-.811.38c-.279.304-1.064 1.04-1.064 2.535 0 1.495 1.089 2.94 1.241 3.143.152.203 2.144 3.275 5.196 4.593.726.314 1.292.502 1.734.643.728.232 1.391.199 1.916.12.585-.088 1.794-.733 2.047-1.442.253-.71.253-1.318.178-1.443-.076-.126-.279-.202-.584-.354z"/></svg>
+            </a>
+            <a id="link-location" href="#" target="_blank" class="btn-social w-14 h-14 rounded-full text-oro">
+                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            </a>
+            <a id="link-facebook" href="#" target="_blank" class="btn-social w-14 h-14 rounded-full text-oro">
+                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a id="link-instagram" href="#" target="_blank" class="btn-social w-14 h-14 rounded-full text-oro">
+                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a id="link-tiktok" href="#" target="_blank" class="btn-social w-14 h-14 rounded-full text-oro">
+                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+            </a>
+        </div>
+
+        <a id="link-website" href="#" target="_blank" class="w-[90%] block mt-auto text-center border-2 border-oro rounded-xl py-4 px-4 bg-fondoDark hover:bg-oro text-oro hover:text-fondoDark transition-all font-bold tracking-widest text-[0.65rem] uppercase shadow-lg z-10">
+            Agendar Consulta Profesional
+        </a>
+
+        <p class="text-[0.55rem] tracking-[0.4em] font-sans uppercase text-gray-600 mt-6 pb-2 z-10">
+            © <span id="year">2026</span> SPINGAMMA
+        </p>
+    </div>
+
+    <div id="modal-qr" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/90 backdrop-blur-sm" onclick="toggleQR()">
+        <div class="relative bg-[#1a1a1a] border border-oro/30 p-8 rounded-2xl flex flex-col items-center max-w-[300px]" onclick="event.stopPropagation()">
+            <p class="text-oro text-[0.6rem] tracking-widest uppercase mb-6 font-bold">Código QR Profesional</p>
+            <div class="bg-white p-3 rounded-lg"><img id="img-qr-dinamico" src="" class="w-44 h-44"></div>
+            <button onclick="toggleQR()" class="mt-6 text-gray-500 text-[0.6rem] uppercase tracking-widest">Cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        const CLIENTE_ID = "spingamma";
+        
+        // Manejo Inteligente de Carga
+        const imgPerfil = document.getElementById('profile-img');
+        let loaderRemovido = false;
+
+        function ocultarLoader() {
+            if (loaderRemovido) return;
+            loaderRemovido = true;
+            document.getElementById('loader').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('main-card').classList.add('loaded');
+            }, 600);
+        }
+
+        // El loader desaparecerá SOLO cuando la imagen termine de descargarse
+        imgPerfil.addEventListener('load', ocultarLoader);
+
+        // Respaldo de seguridad por si falla la conexión (quita el loader a los 6 segundos)
+        setTimeout(ocultarLoader, 6000);
+
+        function toggleQR() {
+            const modal = document.getElementById('modal-qr');
+            modal.classList.toggle('hidden');
+            const imgQr = document.getElementById('img-qr-dinamico');
+            const urlActual = encodeURIComponent(window.location.href);
+            imgQr.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${urlActual}&color=121212&bgcolor=FFFFFF`;
+        }
+    </script>
+    <script src="../conexion.js"></script>
+</body>
+</html>
