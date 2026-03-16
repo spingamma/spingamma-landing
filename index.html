@@ -48,7 +48,6 @@
             font-family: 'Playfair Display', serif;
         }
 
-        /* Sistema de Diapositivas (Slides) */
         #app-container {
             position: relative;
             width: 100vw;
@@ -66,15 +65,15 @@
             transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
             transform: translateY(20px);
             display: flex;
-            align-items: center;
+            align-items: flex-start; 
             justify-content: center;
-            /* Padding ajustado para no empujar el texto muy abajo en móvil */
-            padding-top: 85px;
+            padding-top: 90px;
         }
 
         @media (min-width: 768px) {
             .slide {
-                padding-top: 80px; /* Padding de escritorio */
+                align-items: center; 
+                padding-top: 80px; 
             }
         }
 
@@ -99,15 +98,12 @@
             border-bottom: 1px solid rgba(238, 218, 132, 0.2);
         }
 
-        /* Enlaces del Menú (Carrusel) */
         .nav-link {
             position: relative;
             opacity: 0.5;
             transition: opacity 0.3s ease;
         }
-        .nav-link:hover {
-            opacity: 1;
-        }
+        .nav-link:hover { opacity: 1; }
         .nav-link::after {
             content: '';
             position: absolute;
@@ -118,14 +114,9 @@
             background-color: currentColor;
             transition: width 0.3s ease;
         }
-        .nav-link.active-link {
-            opacity: 1;
-        }
-        .nav-link.active-link::after {
-            width: 100%;
-        }
+        .nav-link.active-link { opacity: 1; }
+        .nav-link.active-link::after { width: 100%; }
 
-        /* Temas de Fondo para las diapositivas */
         .bg-home { background-blend-mode: overlay; }
         .bg-light { background-color: #C1C0BC; color: #743b66; }
         .bg-dark { background-color: #2C323E; color: #ffffff; }
@@ -137,18 +128,25 @@
         
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Animación para el Modal */
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .modal-animate {
+            animation: modalFadeIn 0.3s ease-out forwards;
+        }
     </style>
 </head>
 <body>
 
-    <nav class="fixed top-0 left-0 w-full z-50 flex flex-col md:flex-row md:justify-between md:items-center px-4 md:px-16 py-2 md:py-6 transition-all duration-300" id="navbar">
-        
+    <nav class="fixed top-0 left-0 w-full z-40 flex flex-col md:flex-row md:justify-between md:items-center px-4 md:px-16 py-2 md:py-6 transition-all duration-300" id="navbar">
         <div class="flex justify-between items-center w-full md:w-auto">
             <div class="text-xl sm:text-2xl md:text-3xl font-bold font-serif cursor-pointer inline-flex items-center gap-1" onclick="goToSlide(0)">
                 <span id="logo-spin" class="transition-colors duration-300">Spin</span><span id="logo-gamma" class="transition-colors duration-300">Gamma</span>
             </div>
-            
-            <a href="https://wa.me/59100000000?text=Hola,%20deseo%20contactarme%20con%20el%20equipo." target="_blank" id="nav-contact-mobile" class="md:hidden text-[10px] sm:text-xs font-bold tracking-widest uppercase transition-colors whitespace-nowrap opacity-90 underline decoration-dotted underline-offset-4">Contáctanos</a>
+            <a href="https://wa.me/59100000000" target="_blank" id="nav-contact-mobile" class="md:hidden text-[10px] sm:text-xs font-bold tracking-widest uppercase transition-colors whitespace-nowrap opacity-90 underline decoration-dotted underline-offset-4">Contáctanos</a>
         </div>
 
         <div class="w-full md:w-auto mt-2 md:mt-0 overflow-x-auto no-scrollbar flex items-center gap-6 md:gap-8 text-[11px] md:text-xs uppercase tracking-wider font-semibold pb-1 md:pb-0 relative">
@@ -156,35 +154,53 @@
             <button onclick="goToSlide(1)" class="nav-link flex-shrink-0 transition-colors" data-target="1">La Garantía</button>
             <button onclick="goToSlide(2)" class="nav-link flex-shrink-0 transition-colors" data-target="2">Ecosistemas</button>
             <button onclick="goToSlide(3)" class="nav-link flex-shrink-0 transition-colors" data-target="3">Liderazgo</button>
+            <button onclick="goToSlide(4)" class="nav-link flex-shrink-0 transition-colors" data-target="4">Redes</button>
             
-            <a href="https://wa.me/59100000000?text=Hola,%20deseo%20contactarme%20con%20el%20equipo." target="_blank" id="nav-contact-desktop" class="hidden md:inline-flex border px-5 py-2 rounded transition-colors text-xs font-bold tracking-widest ml-2 whitespace-nowrap">Contáctanos</a>
+            <a href="https://wa.me/59100000000" target="_blank" id="nav-contact-desktop" class="hidden md:inline-flex border px-5 py-2 rounded transition-colors text-xs font-bold tracking-widest ml-2 whitespace-nowrap">Contáctanos</a>
         </div>
     </nav>
+
+    <div class="fixed right-6 top-1/2 transform -translate-y-1/2 flex flex-col gap-3 z-40 hidden md:flex" id="nav-dots-container">
+        <button onclick="goToSlide(0)" class="dot w-2 h-2 rounded-full bg-sg-gray opacity-40 transition-all duration-300" data-target="0"></button>
+        <button onclick="goToSlide(1)" class="dot w-2 h-2 rounded-full bg-sg-gray opacity-40 transition-all duration-300" data-target="1"></button>
+        <button onclick="goToSlide(2)" class="dot w-2 h-2 rounded-full bg-sg-gray opacity-40 transition-all duration-300" data-target="2"></button>
+        <button onclick="goToSlide(3)" class="dot w-2 h-2 rounded-full bg-sg-gray opacity-40 transition-all duration-300" data-target="3"></button>
+        <button onclick="goToSlide(4)" class="dot w-2 h-2 rounded-full bg-sg-gray opacity-40 transition-all duration-300" data-target="4"></button>
+    </div>
+
+    <div id="sg-modal" class="fixed inset-0 bg-[#162453]/90 backdrop-blur-md z-50 hidden flex-col items-center justify-center px-4">
+        <button onclick="closeModal()" class="absolute top-6 right-6 md:top-10 md:right-10 text-white hover:text-sg-gold transition-colors z-50">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/></svg>
+        </button>
+
+        <div id="modal-content-wrapper" class="w-full max-w-3xl bg-sg-charcoal rounded-xl border border-sg-steel shadow-2xl flex flex-col overflow-hidden max-h-[85vh]">
+            <div class="bg-sg-navy px-4 py-3 border-b border-sg-steel flex justify-between items-center">
+                <h3 id="modal-title" class="text-sg-gold font-serif font-bold text-lg md:text-xl">Demostración</h3>
+            </div>
+            <div id="modal-body" class="w-full flex-grow overflow-y-auto bg-black relative flex items-center justify-center min-h-[300px]">
+                </div>
+        </div>
+    </div>
 
     <main id="app-container">
 
         <section class="slide active bg-home text-white" id="slide-0">
-            <div class="max-w-5xl px-4 md:px-6 text-center flex flex-col items-center justify-center h-full relative">
+            <div class="max-w-5xl px-4 md:px-6 text-center flex flex-col items-center justify-start md:justify-center h-full pt-[5vh] md:pt-0 relative">
                 <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold mb-[2vh] md:mb-6 leading-tight">
                     La infraestructura digital para<br><span class="text-sg-yellow">escalar con certeza.</span>
                 </h1>
                 <p class="text-[13px] sm:text-base md:text-xl text-sg-gray mb-[4vh] md:mb-10 max-w-3xl mx-auto font-light leading-relaxed px-2">
                     Construimos ecosistemas de software rentables bajo una premisa inquebrantable: entregamos exactamente lo que pides. Desde e-commerce de alta conversión hasta automatización inteligente, con acompañamiento total.
                 </p>
-                <a href="https://wa.me/59100000000?text=Hola,%20deseo%20agendar%20una%20sesión%20estratégica%20para%20escalar%20mi%20negocio%20con%20software." target="_blank" class="inline-flex items-center justify-center gap-2 bg-sg-gold text-sg-navy hover:bg-sg-yellow transition-colors px-6 py-3 md:px-8 md:py-4 rounded font-bold text-[11px] md:text-sm tracking-widest uppercase shadow-[0_0_15px_rgba(238,218,132,0.4)] hover:shadow-[0_0_25px_rgba(253,244,153,0.6)] w-full sm:w-auto">
+                <a href="https://wa.me/59100000000" target="_blank" class="inline-flex items-center justify-center gap-2 bg-sg-gold text-sg-navy hover:bg-sg-yellow transition-colors px-6 py-3 md:px-8 md:py-4 rounded font-bold text-[11px] md:text-sm tracking-widest uppercase shadow-[0_0_15px_rgba(238,218,132,0.4)] hover:shadow-[0_0_25px_rgba(253,244,153,0.6)] w-full sm:w-auto">
                     <span>Agenda una Sesión</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
                 </a>
-                
-                <div class="absolute bottom-6 md:bottom-10 left-1/2 transform -translate-x-1/2 text-sg-gray text-xs md:text-sm animate-pulse flex flex-col items-center gap-1 md:gap-2">
-                    <span class="tracking-widest uppercase text-[9px] md:text-xs">Desliza para explorar</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/></svg>
-                </div>
             </div>
         </section>
 
         <section class="slide bg-light" id="slide-1">
-            <div class="max-w-7xl mx-auto px-6 md:px-16 flex flex-col md:flex-row items-center justify-center gap-[3vh] md:gap-12 w-full h-full pb-4 md:pb-0">
+            <div class="max-w-7xl mx-auto px-6 md:px-16 flex flex-col md:flex-row items-center justify-start md:justify-center gap-[3vh] md:gap-12 w-full h-full pt-[2vh] md:pt-0 pb-4 md:pb-0">
                 <div class="md:w-1/2 text-left w-full">
                     <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-[2vh] md:mb-6 text-sg-navy leading-tight">Dile adiós a los<br>resultados inesperados.</h2>
                     <div class="w-12 md:w-16 h-1 bg-sg-gold mb-[2vh] md:mb-6"></div>
@@ -203,55 +219,84 @@
         </section>
 
         <section class="slide bg-dark" id="slide-2">
-            <div class="max-w-7xl mx-auto px-6 md:px-16 w-full h-full flex flex-col justify-center">
+            <div class="max-w-7xl mx-auto px-6 md:px-16 w-full h-full flex flex-col justify-start md:justify-center pt-[2vh] md:pt-0">
                 <div class="mb-[2vh] md:mb-8 text-center md:text-left">
-                    <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold mb-[1vh] md:mb-4 text-sg-yellow leading-tight">Ecosistemas de Alto Rendimiento</h2>
-                    <p class="text-sg-gray text-xs md:text-base">Herramientas diseñadas para dominar métricas: más ingresos, cero fricción operativa.</p>
+                    <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold mb-[1vh] md:mb-4 text-sg-yellow leading-tight">Nichos de Alto Rendimiento</h2>
+                    <p class="text-sg-gray text-xs md:text-base">Explora nuestras soluciones interactivas diseñadas a la medida.</p>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1.5vh] md:gap-6 no-scrollbar" style="max-height: 60vh; overflow-y: auto; padding-bottom: 20px;">
-                    <div class="bg-sg-steel/30 border border-sg-steel p-4 md:p-6 rounded hover:border-sg-gold hover:bg-sg-steel/50 transition-all duration-300 group cursor-default shadow-lg flex flex-col justify-start">
-                        <div class="mb-[1vh] md:mb-4 glow-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="md:w-6 md:h-6" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
+                    
+                    <div class="bg-sg-steel/30 border border-sg-steel p-4 md:p-6 rounded hover:border-sg-gold hover:bg-sg-steel/50 transition-all duration-300 group shadow-lg flex flex-col justify-between relative overflow-hidden">
+                        <div>
+                            <div class="mb-[1vh] md:mb-4 glow-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="md:w-6 md:h-6" fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/></svg></div>
+                            <h3 class="text-[13px] sm:text-base md:text-lg font-bold mb-1 text-white group-hover:text-sg-gold transition-colors">Clínicas y Salud</h3>
+                            <p class="text-sg-gray text-[11px] md:text-sm leading-relaxed">Automatiza tu agenda, envía recordatorios por WhatsApp a tus pacientes y reduce el ausentismo a cero. Tu clínica en piloto automático.</p>
                         </div>
-                        <h3 class="text-[13px] sm:text-base md:text-lg font-bold mb-1 text-white">E-Commerce Optimizados</h3>
-                        <p class="text-sg-gray text-[11px] md:text-sm leading-relaxed">Tiendas digitales diseñadas bajo psicología de ventas. Reduce el abandono de carrito y escala tus transacciones.</p>
+                        <button onclick="openModal('video', CONFIG_MULTIMEDIA.videoClinicas, 'Sistema de Citas Médicas')" class="mt-3 md:mt-4 flex items-center gap-2 text-sg-gold text-[10px] md:text-xs font-bold uppercase tracking-wider group-hover:translate-x-2 transition-transform outline-none w-fit">
+                            <span>Ver video</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
+                        </button>
                     </div>
 
-                    <div class="bg-sg-steel/30 border border-sg-steel p-4 md:p-6 rounded hover:border-sg-gold hover:bg-sg-steel/50 transition-all duration-300 group cursor-default shadow-lg flex flex-col justify-start">
-                        <div class="mb-[1vh] md:mb-4 glow-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="md:w-6 md:h-6" fill="currentColor" viewBox="0 0 16 16"><path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/></svg>
+                    <div class="bg-sg-steel/30 border border-sg-steel p-4 md:p-6 rounded hover:border-sg-gold hover:bg-sg-steel/50 transition-all duration-300 group shadow-lg flex flex-col justify-between relative overflow-hidden">
+                        <div>
+                            <div class="mb-[1vh] md:mb-4 glow-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="md:w-6 md:h-6" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z"/></svg></div>
+                            <h3 class="text-[13px] sm:text-base md:text-lg font-bold mb-1 text-white group-hover:text-sg-gold transition-colors">Profesionales de Alto Nivel</h3>
+                            <p class="text-sg-gray text-[11px] md:text-sm leading-relaxed">Proyecta autoridad desde el primer contacto. Tarjetas de presentación inteligentes y páginas de captura de clientes para profesionales que cierran tratos.</p>
                         </div>
-                        <h3 class="text-[13px] sm:text-base md:text-lg font-bold mb-1 text-white">Control de Inventarios ERP</h3>
-                        <p class="text-sg-gray text-[11px] md:text-sm leading-relaxed">Detén fugas de capital. Gestión centralizada en la nube con reportes financieros en tiempo real.</p>
+                        <button onclick="goToSlide(4)" class="mt-3 md:mt-4 flex items-center gap-2 text-sg-gold text-[10px] md:text-xs font-bold uppercase tracking-wider group-hover:translate-x-2 transition-transform outline-none w-fit">
+                            <span>Ver demo interactiva</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
+                        </button>
                     </div>
 
-                    <div class="bg-sg-steel/30 border border-sg-steel p-4 md:p-6 rounded hover:border-sg-gold hover:bg-sg-steel/50 transition-all duration-300 group cursor-default shadow-lg flex flex-col justify-start">
-                        <div class="mb-[1vh] md:mb-4 glow-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="md:w-6 md:h-6" fill="currentColor" viewBox="0 0 16 16"><path d="M11.5 6.027a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm-1.5 1.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm2.5-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm-1.5 1.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm-6.5-3h1v6h-1v-6zM3 5.5h1v6H3v-6zm-1.5 1.5h1v4h-1v-4z"/><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h11A1.5 1.5 0 0 1 15 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 0-1h-1.464c-.18.276-.395.5-.636.5H2.5a1.5 1.5 0 0 1-1.5-1.5V2.5zM2.5 2a.5.5 0 0 0-.5.5v10.5a.5.5 0 0 0 .5.5h10.5a.5.5 0 0 0 .5-.5V2.5a.5.5 0 0 0-.5-.5H2.5z"/></svg>
+                    <div class="bg-sg-steel/30 border border-sg-steel p-4 md:p-6 rounded hover:border-sg-gold hover:bg-sg-steel/50 transition-all duration-300 group shadow-lg flex flex-col justify-between relative overflow-hidden">
+                        <div>
+                            <div class="mb-[1vh] md:mb-4 glow-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="md:w-6 md:h-6" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg></div>
+                            <h3 class="text-[13px] sm:text-base md:text-lg font-bold mb-1 text-white group-hover:text-sg-gold transition-colors">Retail y Comercio Local</h3>
+                            <p class="text-sg-gray text-[11px] md:text-sm leading-relaxed">Tu tienda abierta 24/7 sin comisiones. Catálogos digitales ultrarrápidos diseñados con psicología de ventas para que el cliente compre directo.</p>
                         </div>
-                        <h3 class="text-[13px] sm:text-base md:text-lg font-bold mb-1 text-white">Sistemas para Restaurantes</h3>
-                        <p class="text-sg-gray text-[11px] md:text-sm leading-relaxed">Menús QR inteligentes que hacen up-selling automático. Optimiza flujo de caja y mejora experiencia.</p>
+                        <button onclick="openModal('meta', '', 'Soluciones E-Commerce & Landing Pages')" class="mt-3 md:mt-4 flex items-center gap-2 text-sg-gold text-[10px] md:text-xs font-bold uppercase tracking-wider group-hover:translate-x-2 transition-transform outline-none w-fit">
+                            <span>Ver ejemplo</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
+                        </button>
                     </div>
 
-                    <div class="bg-sg-steel/30 border border-sg-steel p-4 md:p-6 rounded hover:border-sg-gold hover:bg-sg-steel/50 transition-all duration-300 group cursor-default shadow-lg flex flex-col justify-start">
-                        <div class="mb-[1vh] md:mb-4 glow-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="md:w-6 md:h-6" fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/></svg>
+                    <div class="bg-sg-steel/30 border border-sg-steel p-4 md:p-6 rounded hover:border-sg-gold hover:bg-sg-steel/50 transition-all duration-300 group shadow-lg flex flex-col justify-between relative overflow-hidden">
+                        <div>
+                            <div class="mb-[1vh] md:mb-4 glow-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="md:w-6 md:h-6" fill="currentColor" viewBox="0 0 16 16"><path d="M2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2zm0 1h12a1 1 0 0 1 1 1v2H1V3a1 1 0 0 1 1-1zM1 13V6h14v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zzm4.5-5.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3z"/></svg></div>
+                            <h3 class="text-[13px] sm:text-base md:text-lg font-bold mb-1 text-white group-hover:text-sg-gold transition-colors">Belleza y Cuidado Personal</h3>
+                            <p class="text-sg-gray text-[11px] md:text-sm leading-relaxed">Dile adiós a los cuadernos de reservas. Permite que tus clientes agenden sus propios turnos desde su celular y administra a tu personal eficientemente.</p>
                         </div>
-                        <h3 class="text-[13px] sm:text-base md:text-lg font-bold mb-1 text-white">Gestión de Citas Médicas</h3>
-                        <p class="text-sg-gray text-[11px] md:text-sm leading-relaxed">Agendas con recordatorios por WhatsApp. Reduce ausentismo a cero y maximiza rentabilidad clínica.</p>
+                        <button onclick="openModal('video', CONFIG_MULTIMEDIA.videoBelleza, 'Agenda Automática')" class="mt-3 md:mt-4 flex items-center gap-2 text-sg-gold text-[10px] md:text-xs font-bold uppercase tracking-wider group-hover:translate-x-2 transition-transform outline-none w-fit">
+                            <span>Ver video</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
+                        </button>
                     </div>
+
+                    <div class="bg-sg-steel/30 border border-sg-steel p-4 md:p-6 rounded hover:border-sg-gold hover:bg-sg-steel/50 transition-all duration-300 group shadow-lg flex flex-col justify-between lg:col-span-1 md:col-span-2 relative overflow-hidden">
+                        <div>
+                            <div class="mb-[1vh] md:mb-4 glow-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="md:w-6 md:h-6" fill="currentColor" viewBox="0 0 16 16"><path d="M11.5 6.027a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm-1.5 1.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm2.5-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm-1.5 1.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm-6.5-3h1v6h-1v-6zM3 5.5h1v6H3v-6zm-1.5 1.5h1v4h-1v-4z"/><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h11A1.5 1.5 0 0 1 15 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 0-1h-1.464c-.18.276-.395.5-.636.5H2.5a1.5 1.5 0 0 1-1.5-1.5V2.5zM2.5 2a.5.5 0 0 0-.5.5v10.5a.5.5 0 0 0 .5.5h10.5a.5.5 0 0 0 .5-.5V2.5a.5.5 0 0 0-.5-.5H2.5z"/></svg></div>
+                            <h3 class="text-[13px] sm:text-base md:text-lg font-bold mb-1 text-white group-hover:text-sg-gold transition-colors">Servicios y Mantenimiento</h3>
+                            <p class="text-sg-gray text-[11px] md:text-sm leading-relaxed">Digitaliza tus operaciones diarias. Tarjetas para que te recomienden fácilmente y un sistema de agendamiento para organizar visitas.</p>
+                        </div>
+                        <button onclick="goToSlide(4)" class="mt-3 md:mt-4 flex items-center gap-2 text-sg-gold text-[10px] md:text-xs font-bold uppercase tracking-wider group-hover:translate-x-2 transition-transform outline-none w-fit">
+                            <span>Ver demo interactiva</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </section>
 
         <section class="slide bg-sg-gray" id="slide-3">
-            <div class="max-w-7xl mx-auto px-6 md:px-16 w-full text-center">
+            <div class="max-w-7xl mx-auto px-6 md:px-16 w-full h-full flex flex-col justify-start md:justify-center text-center pt-[3vh] md:pt-0">
                 <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold mb-[1vh] md:mb-2 text-sg-navy">El talento detrás del rendimiento</h2>
                 <p class="text-sg-charcoal mb-[3vh] md:mb-12 text-xs sm:text-sm md:text-base font-medium">Equipos de élite obsesionados con el impacto comercial de cada línea de código.</p>
                 
-                <div class="grid grid-cols-2 gap-2 md:gap-4 max-w-3xl mx-auto">
-                    
+                <div class="grid grid-cols-2 gap-2 md:gap-4 max-w-3xl mx-auto w-full">
                     <div class="relative group overflow-hidden bg-sg-steel aspect-square shadow-lg rounded-sm">
                         <img id="img-jhonatan" src="" alt="Jhonatan Flores" class="w-full h-full object-cover object-top md:object-center transition-transform duration-500 group-hover:scale-105">
                         <div class="absolute bottom-0 left-0 w-full p-2 md:p-6 text-left bg-gradient-to-t from-sg-navy/90 to-transparent text-white border-b-2 border-transparent group-hover:border-sg-gold transition-all">
@@ -259,7 +304,6 @@
                             <h3 class="text-xs sm:text-sm md:text-xl font-serif truncate">Jhonatan Flores C.</h3>
                         </div>
                     </div>
-
                     <div class="relative group overflow-hidden bg-sg-steel aspect-square shadow-lg rounded-sm">
                         <img id="img-wendy" src="" alt="Software Development" class="w-full h-full object-cover object-top md:object-center transition-transform duration-500 group-hover:scale-105">
                         <div class="absolute bottom-0 left-0 w-full p-2 md:p-6 text-left bg-gradient-to-t from-sg-navy/90 to-transparent text-white border-b-2 border-transparent group-hover:border-sg-gold transition-all">
@@ -267,8 +311,17 @@
                             <h3 class="text-xs sm:text-sm md:text-xl font-serif truncate">Wendy Paucara</h3>
                         </div>
                     </div>     
-
                 </div>
+            </div>
+        </section>
+
+        <section class="slide bg-dark" id="slide-4" style="padding-top: 0;">
+            <div class="w-full h-full pt-[80px] md:pt-[90px] pb-0 flex justify-center items-end bg-[#2C323E]">
+                <iframe 
+                    src="https://spingamma.github.io/digital-cards/spingamma/" 
+                    class="w-full md:max-w-[400px] h-full border-0 md:rounded-t-2xl md:shadow-[0_-10px_40px_rgba(0,0,0,0.5)] bg-white transition-all duration-300"
+                    title="Tarjeta Digital SpinGamma">
+                </iframe>
             </div>
         </section>
 
@@ -276,29 +329,35 @@
 
     <script>
         // =========================================================================
-        // ⚙️ CONFIGURACIÓN DE IMÁGENES
+        // ⚙️ CONFIGURACIÓN DE IMÁGENES Y MULTIMEDIA
         // =========================================================================
-        const MIS_IMAGENES = {
+        const CONFIG_MULTIMEDIA = {
+            // Imágenes
             fondoInicio: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop",
             seccionNosotros: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
             fotoJhonatan: "jhona.jpg",
-            fotoWendy: "wendy.jpeg"
+            fotoWendy: "wendy.jpeg",
+            fotoPerfil: "profile.webp",
+
+            // Videos: Pon el nombre de tus archivos .mp4 aquí.
+            videoClinicas: "video.mp4",
+            videoBelleza: "video.mp4"
         };
         // =========================================================================
 
         document.addEventListener("DOMContentLoaded", () => {
             const slideInicio = document.getElementById('slide-0');
-            slideInicio.style.backgroundImage = `linear-gradient(135deg, rgba(22, 36, 83, 0.92) 0%, rgba(44, 50, 62, 0.96) 100%), url('${MIS_IMAGENES.fondoInicio}')`;
+            slideInicio.style.backgroundImage = `linear-gradient(135deg, rgba(22, 36, 83, 0.92) 0%, rgba(44, 50, 62, 0.96) 100%), url('${CONFIG_MULTIMEDIA.fondoInicio}')`;
             slideInicio.style.backgroundPosition = "center";
             slideInicio.style.backgroundSize = "cover";
 
-            document.getElementById('img-nosotros').src = MIS_IMAGENES.seccionNosotros;
-            document.getElementById('img-jhonatan').src = MIS_IMAGENES.fotoJhonatan;
-            document.getElementById('img-wendy').src = MIS_IMAGENES.fotoWendy;
+            document.getElementById('img-nosotros').src = CONFIG_MULTIMEDIA.seccionNosotros;
+            document.getElementById('img-jhonatan').src = CONFIG_MULTIMEDIA.fotoJhonatan;
+            document.getElementById('img-wendy').src = CONFIG_MULTIMEDIA.fotoWendy;
         });
 
         // =========================================================================
-        // LÓGICA DE NAVEGACIÓN Y DIAPOSITIVAS
+        // LÓGICA DE NAVEGACIÓN
         // =========================================================================
         const slides = document.querySelectorAll('.slide');
         const navLinks = document.querySelectorAll('.nav-link');
@@ -341,20 +400,34 @@
         }
 
         function updateNav() {
-            // Actualizar Enlaces de Navegación (Carrusel)
+            const navDots = document.querySelectorAll('.dot');
+            navDots.forEach(dot => {
+                dot.style.opacity = '0.3';
+                dot.style.transform = 'scale(1)';
+                if (parseInt(dot.dataset.target) === currentSlide) {
+                    dot.style.opacity = '1';
+                    dot.style.transform = 'scale(1.4)';
+                    
+                    const currentSlideEl = slides[currentSlide];
+                    if (!currentSlideEl.classList.contains('bg-light') && !currentSlideEl.classList.contains('bg-sg-gray')) {
+                        dot.classList.add('bg-sg-gold');
+                        dot.classList.remove('bg-sg-gray', 'bg-sg-navy');
+                    }
+                } else {
+                    dot.classList.remove('bg-sg-gold');
+                }
+            });
+
             navLinks.forEach(link => {
                 link.classList.remove('active-link');
                 if (parseInt(link.dataset.target) === currentSlide) {
                     link.classList.add('active-link');
-                    // Hacer auto-scroll en móvil para asegurar que el enlace esté visible
                     link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
                 }
             });
 
-            // Actualizar colores del Navbar basado en el fondo (Claro/Oscuro)
             const currentSlideEl = slides[currentSlide];
             if (currentSlideEl.classList.contains('bg-light') || currentSlideEl.classList.contains('bg-sg-gray')) {
-                // Tema claro
                 navbar.classList.add('text-sg-navy');
                 navbar.classList.remove('text-white', 'scrolled');
                 
@@ -367,8 +440,12 @@
                     navContactDesktop.classList.add('border-sg-navy', 'text-sg-navy', 'hover:bg-sg-navy', 'hover:text-white');
                     navContactDesktop.classList.remove('border-sg-gold', 'text-sg-gold', 'hover:bg-sg-gold', 'hover:text-sg-navy');
                 }
+
+                navDots.forEach(d => {
+                    d.classList.add('bg-sg-navy');
+                    d.classList.remove('bg-white', 'bg-sg-gray', 'bg-sg-gold');
+                });
             } else {
-                // Tema Oscuro
                 navbar.classList.remove('text-sg-navy');
                 navbar.classList.add('text-white');
                 navbar.classList.toggle('scrolled', currentSlide !== 0);
@@ -382,15 +459,80 @@
                     navContactDesktop.classList.add('border-sg-gold', 'text-sg-gold', 'hover:bg-sg-gold', 'hover:text-sg-navy');
                     navContactDesktop.classList.remove('border-sg-navy', 'text-sg-navy', 'hover:bg-sg-navy', 'hover:text-white');
                 }
+
+                navDots.forEach(d => {
+                    if (parseInt(d.dataset.target) !== currentSlide) {
+                        d.classList.add('bg-sg-gray');
+                        d.classList.remove('bg-sg-navy');
+                    }
+                });
             }
         }
 
-        // Eventos de Scroll
+        // =========================================================================
+        // LÓGICA DE MODALES (Video y Meta-mensaje)
+        // =========================================================================
+        const modal = document.getElementById('sg-modal');
+        const modalBody = document.getElementById('modal-body');
+        const modalTitle = document.getElementById('modal-title');
+        const modalWrapper = document.getElementById('modal-content-wrapper');
+
+        function openModal(type, contentSrc, title) {
+            modalTitle.innerText = title;
+            modalBody.innerHTML = ''; 
+            
+            modalWrapper.classList.remove('modal-animate');
+            void modalWrapper.offsetWidth; 
+            modalWrapper.classList.add('modal-animate');
+
+            if (type === 'video') {
+                modalBody.innerHTML = `
+                    <video class="w-full h-auto max-h-[70vh] object-contain bg-black" controls autoplay playsinline>
+                        <source src="${contentSrc}" type="video/mp4">
+                        Tu navegador no soporta el formato de video.
+                    </video>`;
+            } 
+            else if (type === 'meta') {
+                modalBody.innerHTML = `
+                    <div class="bg-sg-charcoal text-center p-8 md:p-12 w-full flex flex-col items-center justify-center min-h-[300px]">
+                        <div class="text-sg-gold mb-6 animate-bounce">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg>
+                        </div>
+                        <h4 class="text-2xl md:text-3xl font-bold text-white mb-4">¡Ya estás en una Landing Page!</h4>
+                        <p class="text-sg-gray text-sm md:text-base leading-relaxed max-w-lg mb-8">
+                            Toda la página web en la que estás navegando en este momento es un ejemplo de las Landing Pages de alta conversión y velocidad extrema que creamos en SpinGamma.
+                        </p>
+                        <a href="https://wa.me/59100000000?text=Hola,%20quiero%20una%20Landing%20Page%20como%20la%20de%20SpinGamma" target="_blank" class="bg-sg-gold text-sg-navy hover:bg-sg-yellow font-bold py-3 px-8 rounded transition-colors shadow-lg">
+                            ¡Quiero una para mi negocio!
+                        </a>
+                    </div>`;
+            }
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            modalBody.innerHTML = ''; 
+            document.body.style.overflow = ''; 
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
         window.addEventListener('wheel', (e) => {
+            if (!modal.classList.contains('hidden')) return;
+
             const isScrollableContent = e.target.closest('.no-scrollbar') && 
                  (e.target.closest('.no-scrollbar').scrollHeight > e.target.closest('.no-scrollbar').clientHeight);
             
-            // Ignorar scroll horizontal (como el menú carrusel)
             const isHorizontalScroll = Math.abs(e.deltaX) > Math.abs(e.deltaY);
             
             if(!isScrollableContent && !isHorizontalScroll) {
@@ -399,18 +541,19 @@
             }
         });
 
-        // Eventos Táctiles (Swipe)
         let touchStartY = 0;
         let touchEndY = 0;
         let touchStartX = 0;
         let touchEndX = 0;
 
         window.addEventListener('touchstart', e => {
+            if (!modal.classList.contains('hidden')) return;
             touchStartY = e.changedTouches[0].screenY;
             touchStartX = e.changedTouches[0].screenX;
         }, {passive: true});
 
         window.addEventListener('touchend', e => {
+            if (!modal.classList.contains('hidden')) return;
             touchEndY = e.changedTouches[0].screenY;
             touchEndX = e.changedTouches[0].screenX;
             handleTouchSwipe();
@@ -421,7 +564,6 @@
             const yDiff = touchStartY - touchEndY;
             const xDiff = touchStartX - touchEndX;
 
-            // Asegurarnos de que el usuario está deslizando arriba/abajo y no a los lados (carrusel)
             if (Math.abs(yDiff) > Math.abs(xDiff)) {
                 if (yDiff > swipeThreshold) {
                     goToSlide(currentSlide + 1);
@@ -431,13 +573,15 @@
             }
         }
 
-        // Navegación por teclado
         window.addEventListener('keydown', (e) => {
+            if (!modal.classList.contains('hidden')) {
+                if (e.key === 'Escape') closeModal();
+                return;
+            }
             if (e.key === 'ArrowDown') goToSlide(currentSlide + 1);
             if (e.key === 'ArrowUp') goToSlide(currentSlide - 1);
         });
 
-        // Inicializar
         updateNav();
 
     </script>
