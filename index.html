@@ -180,7 +180,7 @@
                             </div>
                         </div>
                         
-                        <div id="content-tarjetas-planes" class="hidden grid-cols-1 md:grid-cols-3 gap-6 w-full fade-in pb-10 md:pb-0"></div>
+                        <div id="content-tarjetas-planes" class="hidden grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto w-full fade-in pb-10 md:pb-0"></div>
 
                     </div>
                 </div>
@@ -259,7 +259,7 @@
                             </div>
                         </div>
                         
-                        <div id="content-chatbot-planes" class="hidden grid-cols-1 md:grid-cols-3 gap-6 w-full fade-in pb-10 md:pb-0"></div>
+                        <div id="content-chatbot-planes" class="hidden grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto w-full fade-in pb-10 md:pb-0"></div>
 
                     </div>
                 </div>
@@ -302,67 +302,49 @@
         const GLOBAL_CONFIG = {
             
             // ==========================================
-            // TIPOGRAFÍA Y TAMAÑOS (NUEVO CONTROL TOTAL)
+            // TIPOGRAFÍA Y TAMAÑOS
             // ==========================================
             tipografia: {
                 fuenteTitulos: "Playfair Display",
                 fuenteParrafos: "Inter",
-                fuenteMenu: "Inter",          // Tipo de letra exclusivo para el Menú
-                fuenteTarjetas: "Playfair Display", // Tipo de letra exclusivo para los títulos de las Tarjetas
+                fuenteMenu: "Inter",          
+                fuenteTarjetas: "Playfair Display", 
                 urlGoogleFonts: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap",
                 
-                // Controla los tamaños relativos usando clases de Tailwind (ej: text-xl, text-2xl)
                 tamanos: {
-                    menu: "text-xs md:text-sm",                      // Tamaño de las letras del menú
-                    titulos: "text-3xl md:text-5xl lg:text-6xl",     // Tamaño de los Títulos de secciones
-                    tarjetaTitulo: "text-xl md:text-2xl",            // Tamaño del título del plan (ej: Básico, Pro)
-                    tarjetaPrecio: "text-4xl md:text-5xl lg:text-6xl"// Tamaño del precio en el plan
+                    menu: "text-xs md:text-sm",                      
+                    titulos: "text-3xl md:text-5xl lg:text-6xl",     
+                    tarjetaTitulo: "text-xl md:text-2xl",            
+                    tarjetaPrecio: "text-4xl md:text-5xl lg:text-6xl"
                 }
             },
             
             // ==========================================
             // EDICIÓN ABSOLUTA DE COLORES 
-            // #FFFFFF Blanco
-            // #1E3D51 Azul Marino
-            // #32698F Azul AceroBotones
-            // #B95221 Naranja
             // ==========================================
             coloresUI: {
-                // 1. FONDOS DE LA PÁGINA
-                fondoPrincipalClaro: "#FFFFFF",      // Blanco para máxima limpieza tipo SaaS
-                fondoSutilClaro: "#FFFFFF",          // Mantenemos blanco (la elegancia la darán los bordes)
-                
-                // 2. LOGO
-                logoSpin: "#32698F",                 // Azul Marino (Confianza)
-                logoGamma: "#B95221",                // Naranja (Toque de innovación)
-                
-                // 3. MENÚ Y LÍNEAS
-                menuEnlaces: "#1E3D51",              // Azul Marino (Legibilidad perfecta)
-                menuLineaDivisoria: "#32698F",       // Azul Acero (Sólido y corporativo)
-                
-                // 4. BOTÓN DEL MENÚ (Contáctanos)
-                menuBotonBorde: "#32698F",           // Azul Acero
-                menuBotonTexto: "#32698F",           // Azul Acero
-                menuBotonHoverFondo: "#32698F",      // Azul Acero
-                menuBotonHoverTexto: "#FFFFFF",      // Blanco
-                
-                // 5. TÍTULOS Y DESCRIPCIONES (H1, H2, P)
-                tituloColorPrincipal: "#1E3D51",     // Azul Marino (Jerarquía fuerte)
-                tituloColorResaltado: "#B95221",     // Naranja (Para la palabra clave del Hero)
-                textoDescripcion: "#1E3D51",         // Azul Marino (Mejor que el gris, da un contraste muy fino)
-                
-                // 6. BOTONES GENERALES Y SWITCH (TABS)
-                botonFondo: "#32698F",               // Azul Acero (Tal como pediste)
-                botonTexto: "#FFFFFF",               // Blanco puro
-                
-                // 7. CAJAS Y TARJETAS DE PLANES
-                tarjetaTitulo: "#B95221",            // Azul Marino (Estructura el nombre del plan)
-                tarjetaPrecio: "#32698F",            // Naranja (Psicología de ventas: resalta el precio y la oferta)
-                colorBordesCajas: "#32698F"          // Azul Acero (Para delimitar las tarjetas de precios elegantemente)
+                fondoPrincipalClaro: "#FFFFFF",      
+                fondoSutilClaro: "#FFFFFF",          
+                logoSpin: "#32698F",                 
+                logoGamma: "#B95221",                
+                menuEnlaces: "#1E3D51",              
+                menuLineaDivisoria: "#32698F",       
+                menuBotonBorde: "#32698F",           
+                menuBotonTexto: "#32698F",           
+                menuBotonHoverFondo: "#32698F",      
+                menuBotonHoverTexto: "#FFFFFF",      
+                tituloColorPrincipal: "#1E3D51",     
+                tituloColorResaltado: "#B95221",     
+                textoDescripcion: "#1E3D51",         
+                botonFondo: "#32698F",               
+                botonTexto: "#FFFFFF",               
+                tarjetaTitulo: "#B95221",            
+                tarjetaPrecio: "#32698F",            
+                colorBordesCajas: "#32698F"          
             },
             
             // ==========================================
-            // TEXTOS Y PLANES 
+            // TEXTOS Y PLANES (TASA DE CAMBIO 1 USD = 9.30 Bs)
             // ==========================================
             textosUI: {
                 logoParte1: "Spin",
@@ -385,28 +367,106 @@
                 titTarjetas: "Tarjetas de Presentación 2.0",
                 descTarjetas: "El fin de las tarjetas de papel. Obtén tu tarjeta QR digital, comparte tus redes sociales, ubicación y catálogos en un solo toque directo al teléfono de tu cliente.",
                 ctaInfoTarjetas: "Consultar Diseño Base",
+                
                 planesTarjetas: [
-                    { nombre: "Básico", precio: "$10", freq: "/año", desc: "Ideal para profesionales", features: ["Perfil Personalizado", "Código QR Descargable", "Ubicación en Maps"] },
-                    { nombre: "Pro", precio: "$30", freq: "/año", desc: "Vendedores independientes", features: ["Todo lo Básico", "Catálogo de 10 productos", "Botón de WhatsApp Directo"] },
-                    { nombre: "Elite", precio: "$50", freq: "/año", desc: "Agencias y Corporativos", features: ["Todo lo Pro", "Multiperfiles de empleado", "Tecnología NFC Física"] }
+                    { 
+                        nombre: "Básico", 
+                        precio: "$16.13", 
+                        freq: "/año", 
+                        desc: "Tu primera gran impresión", 
+                        features: [
+                            "Perfil VIP en red laboral SpinJob", 
+                            "Botones directos a tu WhatsApp y GPS", 
+                            "Código QR descargable (¡Listo para imprimir!)",
+                            "1 Actualización de datos anual incluida"
+                        ] 
+                    },
+                    { 
+                        nombre: "Profesional", 
+                        precio: "$36.77", 
+                        freq: "/año", 
+                        desc: "Imagen de alto nivel y prestigio", 
+                        features: [
+                            "Diseño Corporativo Unificado Premium", 
+                            "Catálogo de redes: TikTok, FB, IG, LinkedIn", 
+                            "1 Actualización trimestral incluida",
+                            "Suma perfiles de tu equipo (+$8.17 c/u)"
+                        ] 
+                    }
                 ],
 
                 titLanding: "Sucursales Virtuales (Landing)",
                 descLanding: "Multiplica tu conversión con páginas diseñadas psicológicamente para vender. No es un simple folleto web, es un embudo estructurado para captar leads sin distracciones.",
                 ctaInfoLanding: "Asesoría para mi Landing",
+                
                 planesLanding: [
-                    { nombre: "One Page", precio: "$150", freq: "Pago único", desc: "Captación rápida de Leads", features: ["Diseño Alta Conversión", "Formulario de Contacto", "100% Adaptable a Móviles"] },
-                    { nombre: "Catálogo", precio: "$300", freq: "Pago único", desc: "Ventas de productos", features: ["Todo lo One Page", "Vitrina de Productos", "Botón de Pago Integrado"] },
-                    { nombre: "Embudo", precio: "$500", freq: "Pago único", desc: "Ecosistema de ventas completo", features: ["Páginas Múltiples", "Página de Agradecimiento", "Secuencia de Correos"] }
+                    { 
+                        nombre: "Presencia Web", 
+                        precio: "$247.31", 
+                        freq: "Diseño (Pago Único)", 
+                        desc: "Tu firma digital en internet", 
+                        features: [
+                            "Alquiler y Soporte: $20.43 mensuales",
+                            "Tu negocio visible en internet 24/7", 
+                            "Recepción directa de clientes a tu celular", 
+                            "Mantenimiento rápido bajo demanda"
+                        ] 
+                    },
+                    { 
+                        nombre: "Captura Activa", 
+                        precio: "$326.88", 
+                        freq: "Diseño (Pago Único)", 
+                        desc: "Filtra curiosos, atrae clientes", 
+                        features: [
+                            "Servidor y Dominio: $30.65 mensuales",
+                            "Bot de captura: Guarda y te notifica del cliente", 
+                            "Incluye 1 Correo Corporativo Profesional", 
+                            "Soporta tráfico constante sin caerse"
+                        ] 
+                    },
+                    { 
+                        nombre: "Operación Escalable", 
+                        precio: "$391.40", 
+                        freq: "Diseño (Pago Único)", 
+                        desc: "La experiencia Deluxe total", 
+                        features: [
+                            "Servidor Ultra-Rápido: $53.12 mensuales",
+                            "Dominio .COM propio y correos Google", 
+                            "IA atiende y centraliza tu lista de clientes", 
+                            "Capacidad masiva para miles de visitas"
+                        ] 
+                    }
                 ],
 
                 titChatbot: "Empleados Digitales IA",
                 descChatbot: "Atención automática 24/7. No pierdas más ventas por demorar en responder. Nuestros agentes de Inteligencia Artificial filtran prospectos, agendan citas y cierran ventas de forma natural.",
                 ctaInfoChatbot: "Evaluar mi Bot Ideal",
+                
                 planesChatbot: [
-                    { nombre: "Atención", precio: "$97", freq: "/mes", desc: "Clínicas y Consultorios", features: ["Respuestas a FAQs", "Menú Interactivo", "Horario de Atención 24/7"] },
-                    { nombre: "Agendador", precio: "$197", freq: "/mes", desc: "Servicios por cita", features: ["Todo lo Atención", "Conexión a Google Calendar", "Recordatorios Automáticos"] },
-                    { nombre: "Vendedor", precio: "$297", freq: "/mes", desc: "E-commerce de alto volumen", features: ["IA entrenada con tu negocio", "Recomendación de productos", "Cierre de Ventas en Chat"] }
+                    { 
+                        nombre: "Recepcionista", 
+                        precio: "$102.15", 
+                        freq: "Instalación (Pago Único)", 
+                        desc: "Orden total en tu agenda de reservas", 
+                        features: [
+                            "Sueldo de tu Bot: $40.86 mensuales",
+                            "Agenda hasta 500 reservas automáticamente", 
+                            "Buzón digital que recibe y guarda documentos", 
+                            "Responde 24/7 por mensaje de texto"
+                        ] 
+                    },
+                    { 
+                        nombre: "Asistente IA", 
+                        precio: "$112.37", 
+                        freq: "Instalación (Pago Único)", 
+                        desc: "Atención premium y automatización total", 
+                        features: [
+                            "Sueldo de tu Bot IA: $61.29 mensuales",
+                            "Gestiona hasta 1,000 citas con precisión", 
+                            "La IA lee PDFs, clasifica y recuerda (2 semanas)", 
+                            "Escucha audios de voz y agenda directo al sistema"
+                        ] 
+                    }
                 ],
 
                 tituloEquipo: "Los Arquitectos de tu Sistema",
@@ -546,7 +606,7 @@
             root.style.setProperty('--ui-tarj-precio', GLOBAL_CONFIG.coloresUI.tarjetaPrecio);
             root.style.setProperty('--sg-border-light', GLOBAL_CONFIG.coloresUI.colorBordesCajas);
             
-            // APLICAR TAMAÑOS (Añadiendo las clases de Tailwind de forma dinámica)
+            // APLICAR TAMAÑOS
             const menuContainer = document.getElementById('menu-container');
             if (menuContainer) menuContainer.classList.add(...GLOBAL_CONFIG.tipografia.tamanos.menu.split(' '));
 
