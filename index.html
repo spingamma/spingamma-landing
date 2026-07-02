@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SpinGamma | Ecosistema Tecnológico</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'ui-bg-oscuro': 'var(--ui-bg-oscuro)',       
-                        'ui-bg-claro': 'var(--ui-bg-claro)',         
-                        'ui-titulo-oscuro': 'var(--ui-titulo-oscuro)', 
-                        'ui-parrafo-oscuro': 'var(--ui-parrafo-oscuro)', 
+                        'ui-bg-oscuro': 'var(--ui-bg-oscuro)',
+                        'ui-bg-claro': 'var(--ui-bg-claro)',
+                        'ui-titulo-oscuro': 'var(--ui-titulo-oscuro)',
+                        'ui-parrafo-oscuro': 'var(--ui-parrafo-oscuro)',
                         'ui-btn-bg': 'var(--ui-btn-bg)',
                         'ui-btn-text': 'var(--ui-btn-text)',
                         'ui-nav-text': 'var(--ui-nav-text)',
                         'ui-logo-spin': 'var(--ui-logo-spin)',
                         'ui-logo-gamma': 'var(--ui-logo-gamma)',
                         'sg-border-light': 'var(--sg-border-light)',
-                        
+
                         /* COLORES TARJETAS PLANES */
                         'ui-tarj-tit': 'var(--ui-tarj-tit)',
                         'ui-tarj-precio': 'var(--ui-tarj-precio)'
@@ -39,113 +40,221 @@
     </script>
 
     <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: var(--ui-bg-oscuro); color: var(--ui-desc); font-family: var(--font-parrafos), sans-serif; -webkit-font-smoothing: antialiased; }
-        h1, h2, h3, .font-serif { font-family: var(--font-titulos), serif; }
-        #app-container { position: relative; width: 100vw; height: 100dvh; }
-        
-        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; visibility: hidden; transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); transform: translateY(30px); display: flex; align-items: flex-start; justify-content: center; padding-top: 100px; }
-        @media (min-width: 768px) { .slide { align-items: center; padding-top: 0; } }
-        
-        .slide.active { opacity: 1; visibility: visible; transform: translateY(0); z-index: 10; }
-        .slide.prev-slide { transform: translateY(-30px); }
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: var(--ui-bg-oscuro);
+            color: var(--ui-desc);
+            font-family: var(--font-parrafos), sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1,
+        h2,
+        h3,
+        .font-serif {
+            font-family: var(--font-titulos), serif;
+        }
+
+        #app-container {
+            position: relative;
+            width: 100vw;
+            height: 100dvh;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(30px);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 100px;
+        }
+
+        @media (min-width: 768px) {
+            .slide {
+                align-items: center;
+                padding-top: 0;
+            }
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            z-index: 10;
+        }
+
+        .slide.prev-slide {
+            transform: translateY(-30px);
+        }
 
         /* LÍNEA DIVISORIA DEL MENÚ PARAMETRIZADA */
-        nav { transition: all 0.4s ease; border-bottom: 3px solid var(--ui-linea-menu); background-color: var(--ui-bg-oscuro); z-index: 50; }
-        
-        .nav-link { position: relative; opacity: 0.7; transition: opacity 0.3s ease; outline: none; color: var(--ui-nav-text); }
-        .nav-link:hover, .nav-link.active-link { opacity: 1; color: var(--ui-nav-text); }
-        
+        nav {
+            transition: all 0.4s ease;
+            border-bottom: 3px solid var(--ui-linea-menu);
+            background-color: var(--ui-bg-oscuro);
+            z-index: 50;
+        }
+
+        .nav-link {
+            position: relative;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            outline: none;
+            color: var(--ui-nav-text);
+        }
+
+        .nav-link:hover,
+        .nav-link.active-link {
+            opacity: 1;
+            color: var(--ui-nav-text);
+        }
+
         /* BOTONES DE MENÚ (Desktop y Mobile) PARAMETRIZADOS */
-        .btn-nav-contacto { border: 2px solid var(--ui-nav-cta-border); color: var(--ui-nav-cta-text); background-color: transparent; }
-        .btn-nav-contacto:hover { background-color: var(--ui-nav-cta-hover-bg); color: var(--ui-nav-cta-hover-text); border-color: var(--ui-nav-cta-hover-bg); }
+        .btn-nav-contacto {
+            border: 2px solid var(--ui-nav-cta-border);
+            color: var(--ui-nav-cta-text);
+            background-color: transparent;
+        }
 
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .btn-nav-contacto:hover {
+            background-color: var(--ui-nav-cta-hover-bg);
+            color: var(--ui-nav-cta-hover-text);
+            border-color: var(--ui-nav-cta-hover-bg);
+        }
 
-        /* Modal del Video */
-        #video-modal { background-color: rgba(0,0,0,0.9); backdrop-filter: blur(5px); z-index: 100; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
-        #video-modal.active { opacity: 1; visibility: visible; }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+
 
         /* Animaciones para cambio de TABS */
-        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
+
 <body>
 
-    <nav class="fixed top-0 left-0 w-full flex flex-col md:flex-row md:justify-between md:items-center px-5 md:px-16 py-3 md:py-4" id="navbar">
+    <nav class="fixed top-0 left-0 w-full flex flex-col md:flex-row md:justify-between md:items-center px-5 md:px-16 py-3 md:py-4"
+        id="navbar">
         <div class="flex justify-between items-center w-full md:w-auto">
-            <div class="text-2xl md:text-3xl font-bold font-serif cursor-pointer inline-flex items-center tracking-tight" onclick="goToSlide(0)">
+            <div class="text-2xl md:text-3xl font-bold font-serif cursor-pointer inline-flex items-center tracking-tight"
+                onclick="goToSlide(0)">
                 <span id="logo-spin" class="text-ui-logo-spin transition-colors duration-300"></span>
                 <span id="logo-gamma" class="text-ui-logo-gamma transition-colors duration-300"></span>
             </div>
-            <a href="#" target="_blank" class="btn-nav-contacto js-wa-link md:hidden text-[11px] font-bold tracking-widest uppercase px-4 py-1.5 rounded-full transition-colors">
+            <a href="#" target="_blank"
+                class="btn-nav-contacto js-wa-link md:hidden text-[11px] font-bold tracking-widest uppercase px-4 py-1.5 rounded-full transition-colors">
                 <span class="ui-texto-nav-btn"></span>
             </a>
         </div>
 
-        <div id="menu-container" class="w-full md:w-auto mt-4 md:mt-0 overflow-x-auto no-scrollbar flex items-center gap-6 md:gap-8 uppercase tracking-widest font-bold pb-2 md:pb-0 font-menu">
+        <div id="menu-container"
+            class="w-full md:w-auto mt-4 md:mt-0 overflow-x-auto no-scrollbar flex items-center gap-6 md:gap-8 uppercase tracking-widest font-bold pb-2 md:pb-0 font-menu">
             <button onclick="goToSlide(0)" class="nav-link flex-shrink-0" data-target="0" id="ui-nav-1"></button>
             <button onclick="goToSlide(1)" class="nav-link flex-shrink-0" data-target="1" id="ui-nav-2"></button>
             <button onclick="goToSlide(2)" class="nav-link flex-shrink-0" data-target="2" id="ui-nav-3"></button>
             <button onclick="goToSlide(3)" class="nav-link flex-shrink-0" data-target="3" id="ui-nav-4"></button>
             <button onclick="goToSlide(4)" class="nav-link flex-shrink-0" data-target="4" id="ui-nav-5"></button>
-            <button onclick="goToSlide(5)" class="nav-link flex-shrink-0" data-target="5" id="ui-nav-6"></button>
-            
-            <a href="#" target="_blank" class="btn-nav-contacto js-wa-link hidden md:inline-flex px-6 py-2 rounded-full transition-all duration-300 text-xs font-bold tracking-widest ml-4 shadow-sm uppercase">
+
+            <a href="#" target="_blank"
+                class="btn-nav-contacto js-wa-link hidden md:inline-flex px-6 py-2 rounded-full transition-all duration-300 text-xs font-bold tracking-widest ml-4 shadow-sm uppercase">
                 <span class="ui-texto-nav-btn"></span>
             </a>
         </div>
     </nav>
 
-    <div class="fixed right-8 top-1/2 transform -translate-y-1/2 flex-col gap-4 z-40 hidden md:flex" id="nav-dots-container">
-        <button onclick="goToSlide(0)" class="dot w-2.5 h-2.5 rounded-full opacity-30 transition-all duration-300 hover:opacity-100" data-target="0"></button>
-        <button onclick="goToSlide(1)" class="dot w-2.5 h-2.5 rounded-full opacity-30 transition-all duration-300 hover:opacity-100" data-target="1"></button>
-        <button onclick="goToSlide(2)" class="dot w-2.5 h-2.5 rounded-full opacity-30 transition-all duration-300 hover:opacity-100" data-target="2"></button>
-        <button onclick="goToSlide(3)" class="dot w-2.5 h-2.5 rounded-full opacity-30 transition-all duration-300 hover:opacity-100" data-target="3"></button>
-        <button onclick="goToSlide(4)" class="dot w-2.5 h-2.5 rounded-full opacity-30 transition-all duration-300 hover:opacity-100" data-target="4"></button>
-        <button onclick="goToSlide(5)" class="dot w-2.5 h-2.5 rounded-full opacity-30 transition-all duration-300 hover:opacity-100" data-target="5"></button>
+    <div class="fixed right-8 top-1/2 transform -translate-y-1/2 flex-col gap-4 z-40 hidden md:flex"
+        id="nav-dots-container">
+        <button onclick="goToSlide(0)"
+            class="dot w-2.5 h-2.5 rounded-full opacity-30 transition-all duration-300 hover:opacity-100"
+            data-target="0"></button>
+        <button onclick="goToSlide(1)"
+            class="dot w-2.5 h-2.5 rounded-full opacity-30 transition-all duration-300 hover:opacity-100"
+            data-target="1"></button>
+        <button onclick="goToSlide(2)"
+            class="dot w-2.5 h-2.5 rounded-full opacity-30 transition-all duration-300 hover:opacity-100"
+            data-target="2"></button>
+        <button onclick="goToSlide(3)"
+            class="dot w-2.5 h-2.5 rounded-full opacity-30 transition-all duration-300 hover:opacity-100"
+            data-target="3"></button>
+        <button onclick="goToSlide(4)"
+            class="dot w-2.5 h-2.5 rounded-full opacity-30 transition-all duration-300 hover:opacity-100"
+            data-target="4"></button>
     </div>
 
-    <div id="video-modal" class="fixed inset-0 flex items-center justify-center p-4 md:p-10" onclick="closeVideoModal(event)">
-        <div class="relative w-full max-w-6xl aspect-video bg-black rounded-xl shadow-2xl overflow-hidden border-2 border-ui-titulo-1/20" onclick="event.stopPropagation()">
-            <button class="absolute top-4 right-4 text-white hover:text-ui-btn-bg z-10 p-2 bg-black/50 rounded-full" onclick="closeVideoModal(event)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.646a.5.5 0 0 1 .708.708L8.707 8l2.646 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.646a.5.5 0 0 1-.708-.708L7.293 8 4.646 4.646z"/></svg>
-            </button>
-            <video id="modal-player" class="w-full h-full object-contain" controls>
-                <source src="" type="video/mp4">
-            </video>
-        </div>
-    </div>
+
 
     <main id="app-container">
-        
+
         <section class="slide active bg-ui-bg-oscuro" id="slide-0">
-            <div class="max-w-5xl px-6 text-center flex flex-col items-center justify-center h-full relative z-10 pb-20 md:pb-0 pt-16 md:pt-0">
+            <div
+                class="max-w-5xl px-6 text-center flex flex-col items-center justify-center h-full relative z-10 pb-20 md:pb-0 pt-16 md:pt-0">
                 <h1 id="ui-titulo-inicio" class="font-bold mb-6 leading-tight text-ui-titulo-1 js-dynamic-title"></h1>
-                <p id="ui-desc-inicio" class="text-sm sm:text-base md:text-xl text-ui-desc mb-10 max-w-2xl mx-auto font-medium leading-relaxed"></p>
-                <a href="#" onclick="goToSlide(1)" class="inline-flex items-center justify-center bg-ui-btn-bg text-ui-btn-text hover:opacity-90 transition-all px-10 py-4 rounded-full font-bold text-xs md:text-sm tracking-widest uppercase shadow-lg w-full sm:w-auto">
+                <p id="ui-desc-inicio"
+                    class="text-sm sm:text-base md:text-xl text-ui-desc mb-10 max-w-2xl mx-auto font-medium leading-relaxed">
+                </p>
+                <a href="#" onclick="goToSlide(1)"
+                    class="inline-flex items-center justify-center bg-ui-btn-bg text-ui-btn-text hover:opacity-90 transition-all px-10 py-4 rounded-full font-bold text-xs md:text-sm tracking-widest uppercase shadow-lg w-full sm:w-auto">
                     <span id="ui-texto-btn-hero"></span>
                 </a>
             </div>
         </section>
 
         <section class="slide bg-ui-bg-claro" id="slide-1">
-            <div class="max-w-[1400px] mx-auto w-full h-full px-6 md:px-12 flex flex-col md:flex-row items-center justify-start md:justify-between gap-8 md:gap-16 pt-4 md:pt-[90px] pb-10 overflow-y-auto no-scrollbar">
-                
+            <div
+                class="max-w-[1400px] mx-auto w-full h-full px-6 md:px-12 flex flex-col md:flex-row items-center justify-start md:justify-between gap-8 md:gap-16 pt-4 md:pt-[90px] pb-10 overflow-y-auto no-scrollbar">
+
                 <div class="w-full lg:w-[42%] flex flex-col text-left shrink-0">
-                    <div class="inline-block px-3 py-1 bg-ui-btn-bg/10 border border-ui-btn-bg/30 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest text-ui-btn-bg mb-4 w-fit">
+                    <div
+                        class="inline-block px-3 py-1 bg-ui-btn-bg/10 border border-ui-btn-bg/30 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest text-ui-btn-bg mb-4 w-fit">
                         Paso 1: Organización
                     </div>
-                    <h2 class="font-bold mb-6 text-ui-titulo-1 leading-tight font-serif js-dynamic-title" id="ui-tit-spinjob"></h2>
-                    <p class="text-ui-desc mb-8 text-sm md:text-lg leading-relaxed font-medium opacity-90" id="ui-desc-spinjob"></p>
-                    <a id="btn-spinjob" href="#" target="_blank" class="inline-flex items-center justify-center gap-2 bg-ui-btn-bg text-ui-btn-text hover:opacity-90 transition-all px-10 py-4 rounded-full font-bold text-xs md:text-sm tracking-widest uppercase shadow-lg w-fit">
+                    <h2 class="font-bold mb-6 text-ui-titulo-1 leading-tight font-serif js-dynamic-title"
+                        id="ui-tit-spinjob"></h2>
+                    <p class="text-ui-desc mb-8 text-sm md:text-lg leading-relaxed font-medium opacity-90"
+                        id="ui-desc-spinjob"></p>
+                    <a id="btn-spinjob" href="#" target="_blank"
+                        class="inline-flex items-center justify-center gap-2 bg-ui-btn-bg text-ui-btn-text hover:opacity-90 transition-all px-10 py-4 rounded-full font-bold text-xs md:text-sm tracking-widest uppercase shadow-lg w-fit">
                         Ir a la Plataforma
                     </a>
                 </div>
-                
+
                 <div class="w-full lg:w-[50%] relative group shadow-2xl rounded-2xl shrink-0">
-                    <div class="relative bg-white border border-sg-border-light rounded-2xl overflow-hidden aspect-video md:aspect-[16/10] flex items-center justify-center">
+                    <div
+                        class="relative bg-white border border-sg-border-light rounded-2xl overflow-hidden aspect-video md:aspect-[16/10] flex items-center justify-center">
                         <img id="img-spinjob" src="" alt="SpinJob" class="w-full h-full object-cover object-top">
                     </div>
                 </div>
@@ -155,32 +264,45 @@
 
         <section class="slide bg-ui-bg-oscuro" id="slide-2">
             <div class="w-full h-full px-6 md:px-12 flex flex-col pt-4 md:pt-[110px] pb-10">
-                
+
                 <div class="flex justify-center w-full shrink-0 mb-6 z-20">
-                    <div class="inline-flex bg-white/60 backdrop-blur-sm border border-sg-border-light rounded-full p-1 shadow-sm">
-                        <button onclick="toggleTab('tarjetas', 'info')" id="tab-tarjetas-info" class="px-8 py-2 rounded-full text-xs font-bold uppercase tracking-widest bg-ui-btn-bg text-ui-btn-text transition-all outline-none focus:outline-none">Qué es</button>
-                        <button onclick="toggleTab('tarjetas', 'planes')" id="tab-tarjetas-planes" class="px-8 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-ui-desc hover:bg-white/50 transition-all outline-none focus:outline-none opacity-70">Planes</button>
+                    <div
+                        class="inline-flex bg-white/60 backdrop-blur-sm border border-sg-border-light rounded-full p-1 shadow-sm">
+                        <button onclick="toggleTab('tarjetas', 'info')" id="tab-tarjetas-info"
+                            class="px-8 py-2 rounded-full text-xs font-bold uppercase tracking-widest bg-ui-btn-bg text-ui-btn-text transition-all outline-none focus:outline-none">Qué
+                            es</button>
+                        <button onclick="toggleTab('tarjetas', 'planes')" id="tab-tarjetas-planes"
+                            class="px-8 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-ui-desc hover:bg-white/50 transition-all outline-none focus:outline-none opacity-70">Planes</button>
                     </div>
                 </div>
 
                 <div class="w-full flex-1 overflow-y-auto no-scrollbar scroll-area flex flex-col md:justify-center">
                     <div class="max-w-[1400px] mx-auto w-full">
-                        
-                        <div id="content-tarjetas-info" class="flex flex-col md:flex-row-reverse items-center justify-between gap-10 md:gap-16 w-full fade-in pb-10 md:pb-0">
+
+                        <div id="content-tarjetas-info"
+                            class="flex flex-col md:flex-row-reverse items-center justify-between gap-10 md:gap-16 w-full fade-in pb-10 md:pb-0">
                             <div class="w-full lg:w-[42%] text-left shrink-0">
-                                <h2 class="font-bold mb-4 text-ui-titulo-1 leading-tight font-serif js-dynamic-title" id="ui-tit-tarjetas"></h2>
-                                <p class="text-ui-desc text-sm md:text-lg leading-relaxed font-medium mb-8 opacity-90" id="ui-desc-tarjetas"></p>
-                                <a href="#" target="_blank" class="js-wa-link inline-flex items-center justify-center bg-ui-btn-bg text-ui-btn-text hover:opacity-90 transition-all px-10 py-4 rounded-full font-bold text-xs md:text-sm tracking-widest uppercase shadow-lg w-fit" id="ui-cta-info-tarjetas"></a>
+                                <h2 class="font-bold mb-4 text-ui-titulo-1 leading-tight font-serif js-dynamic-title"
+                                    id="ui-tit-tarjetas"></h2>
+                                <p class="text-ui-desc text-sm md:text-lg leading-relaxed font-medium mb-8 opacity-90"
+                                    id="ui-desc-tarjetas"></p>
+                                <a href="#" target="_blank"
+                                    class="js-wa-link inline-flex items-center justify-center bg-ui-btn-bg text-ui-btn-text hover:opacity-90 transition-all px-10 py-4 rounded-full font-bold text-xs md:text-sm tracking-widest uppercase shadow-lg w-fit"
+                                    id="ui-cta-info-tarjetas"></a>
                             </div>
 
                             <div class="w-full lg:w-[50%] relative group shadow-2xl rounded-2xl shrink-0">
-                                <div class="relative bg-white border border-sg-border-light rounded-2xl overflow-hidden aspect-video md:aspect-[16/10] flex items-center justify-center">
-                                    <img id="img-tarjetas" src="" alt="Tarjetas Digitales" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105">
+                                <div
+                                    class="relative bg-white border border-sg-border-light rounded-2xl overflow-hidden aspect-video md:aspect-[16/10] flex items-center justify-center">
+                                    <img id="img-tarjetas" src="" alt="Tarjetas Digitales"
+                                        class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105">
                                 </div>
                             </div>
                         </div>
-                        
-                        <div id="content-tarjetas-planes" class="hidden grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto w-full fade-in pb-10 md:pb-0"></div>
+
+                        <div id="content-tarjetas-planes"
+                            class="hidden grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto w-full fade-in pb-10 md:pb-0">
+                        </div>
 
                     </div>
                 </div>
@@ -188,104 +310,123 @@
         </section>
 
         <section class="slide bg-ui-bg-claro" id="slide-3">
-            <div class="w-full h-full px-6 md:px-12 flex flex-col pt-4 md:pt-[110px] pb-10">
-                
-                <div class="flex justify-center w-full shrink-0 mb-6 z-20">
-                    <div class="inline-flex bg-white/60 backdrop-blur-sm border border-sg-border-light rounded-full p-1 shadow-sm">
-                        <button onclick="toggleTab('landing', 'info')" id="tab-landing-info" class="px-8 py-2 rounded-full text-xs font-bold uppercase tracking-widest bg-ui-btn-bg text-ui-btn-text transition-all outline-none focus:outline-none">Qué es</button>
-                        <button onclick="toggleTab('landing', 'planes')" id="tab-landing-planes" class="px-8 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-ui-desc hover:bg-white/50 transition-all outline-none focus:outline-none opacity-70">Planes</button>
+            <div
+                class="max-w-[1400px] mx-auto w-full h-full px-6 md:px-12 flex flex-col md:flex-row items-center justify-start md:justify-between gap-8 md:gap-16 pt-4 md:pt-[90px] pb-10 overflow-y-auto no-scrollbar">
+
+                <div class="w-full lg:w-[42%] flex flex-col text-left shrink-0">
+                    <div
+                        class="inline-block px-3 py-1 bg-ui-btn-bg/10 border border-ui-btn-bg/30 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest text-ui-btn-bg mb-4 w-fit">
+                        Paso 3: Automatización
                     </div>
+                    <h2 class="font-bold mb-6 text-ui-titulo-1 leading-tight font-serif js-dynamic-title"
+                        id="ui-tit-menus"></h2>
+                    <div class="text-ui-desc text-sm md:text-lg leading-relaxed font-medium mb-8 opacity-90 space-y-4">
+                        <p id="ui-desc-menus"></p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-2">
+                                <svg class="w-5 h-5 text-ui-btn-bg mt-0.5 shrink-0" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span><strong>Pedidos directos:</strong> Recibe pedidos en tu panel de gestión.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-5 h-5 text-ui-btn-bg mt-0.5 shrink-0" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span><strong>Control total:</strong> Actualiza precios, fotos y platos agotados al
+                                    instante.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#" target="_blank"
+                        class="js-wa-link inline-flex items-center justify-center bg-ui-btn-bg text-ui-btn-text hover:opacity-90 transition-all px-10 py-4 rounded-full font-bold text-xs md:text-sm tracking-widest uppercase shadow-lg w-fit"
+                        id="ui-cta-info-menus"></a>
                 </div>
 
-                <div class="w-full flex-1 overflow-y-auto no-scrollbar scroll-area flex flex-col md:justify-center">
-                    <div class="max-w-[1400px] mx-auto w-full">
-                        
-                        <div id="content-landing-info" class="flex flex-col md:flex-row items-center justify-between gap-10 md:gap-16 w-full fade-in pb-10 md:pb-0">
-                            <div class="w-full lg:w-[42%] text-left shrink-0">
-                                <h2 class="font-bold mb-4 text-ui-titulo-1 leading-tight font-serif js-dynamic-title" id="ui-tit-landing"></h2>
-                                <p class="text-ui-desc text-sm md:text-lg leading-relaxed font-medium mb-8 opacity-90" id="ui-desc-landing"></p>
-                                <a href="#" target="_blank" class="js-wa-link inline-flex items-center justify-center bg-ui-btn-bg text-ui-btn-text hover:opacity-90 transition-all px-10 py-4 rounded-full font-bold text-xs md:text-sm tracking-widest uppercase shadow-lg w-fit" id="ui-cta-info-landing"></a>
-                            </div>
-
-                            <div class="w-full lg:w-[50%] relative group shadow-2xl rounded-2xl cursor-pointer shrink-0" onclick="openMediaModal('image')">
-                                <div class="relative bg-white border border-sg-border-light rounded-2xl overflow-hidden aspect-video md:aspect-[16/10] flex items-center justify-center">
-                                    <img id="img-landing" src="" alt="Landing Pages" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105">
-                                    <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-colors">
-                                        <div class="w-16 h-16 bg-ui-btn-bg text-ui-btn-text rounded-full flex items-center justify-center shadow-xl transform group-hover:scale-110 transition-transform">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096a.5.5 0 0 0 .707.707l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096a.5.5 0 0 0-.707-.707L10.172 5.121a.5.5 0 0 0 0 .707zM11.5 5.5a.5.5 0 0 1-.5-.5V2h-3a.5.5 0 0 1 0-1h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5zM4.5 10.5a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 .5-.5z"/></svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <!-- Carrusel de Imágenes de Menús -->
+                <div
+                    class="w-full lg:w-[50%] relative group shadow-2xl rounded-2xl shrink-0 overflow-hidden aspect-video md:aspect-[16/10] bg-white border border-sg-border-light">
+                    <!-- Slides Wrapper -->
+                    <div id="menus-carousel-slides"
+                        class="flex w-full h-full transition-transform duration-500 ease-out">
+                        <div class="w-full h-full shrink-0 flex items-center justify-center relative">
+                            <img id="img-menus-carousel-1" src="" alt="Menús Digitales"
+                                class="w-full h-full object-cover object-top">
+                            <div
+                                class="absolute bottom-4 left-4 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider z-20">
+                                Menús Digitales</div>
                         </div>
-                        
-                        <div id="content-landing-planes" class="hidden grid-cols-1 md:grid-cols-3 gap-6 w-full fade-in pb-10 md:pb-0"></div>
+                        <div class="w-full h-full shrink-0 flex items-center justify-center relative">
+                            <img id="img-menus-carousel-2" src="" alt="Gestionar Pedidos"
+                                class="w-full h-full object-cover object-top">
+                            <div
+                                class="absolute bottom-4 left-4 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider z-20">
+                                Gestionar Pedidos</div>
+                        </div>
+                    </div>
 
+                    <!-- Botones de Navegación -->
+                    <button onclick="prevMenuSlide(event)"
+                        class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white text-ui-btn-bg rounded-full flex items-center justify-center shadow-lg transition-all focus:outline-none opacity-0 group-hover:opacity-100 z-30">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <button onclick="nextMenuSlide(event)"
+                        class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white text-ui-btn-bg rounded-full flex items-center justify-center shadow-lg transition-all focus:outline-none opacity-0 group-hover:opacity-100 z-30">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+
+                    <!-- Indicadores (Dots) -->
+                    <div class="absolute bottom-4 right-4 flex gap-1.5 z-30">
+                        <button onclick="setMenuSlide(0, event)"
+                            class="menus-carousel-dot w-2.5 h-2.5 rounded-full bg-white opacity-45 transition-all"
+                            data-slide="0"></button>
+                        <button onclick="setMenuSlide(1, event)"
+                            class="menus-carousel-dot w-2.5 h-2.5 rounded-full bg-white opacity-45 transition-all"
+                            data-slide="1"></button>
                     </div>
                 </div>
+
             </div>
         </section>
 
-        <section class="slide bg-ui-bg-oscuro" id="slide-4">
-            <div class="w-full h-full px-6 md:px-12 flex flex-col pt-4 md:pt-[110px] pb-10">
-                
-                <div class="flex justify-center w-full shrink-0 mb-6 z-20">
-                    <div class="inline-flex bg-white/60 backdrop-blur-sm border border-sg-border-light rounded-full p-1 shadow-sm">
-                        <button onclick="toggleTab('chatbot', 'info')" id="tab-chatbot-info" class="px-8 py-2 rounded-full text-xs font-bold uppercase tracking-widest bg-ui-btn-bg text-ui-btn-text transition-all outline-none focus:outline-none">Qué es</button>
-                        <button onclick="toggleTab('chatbot', 'planes')" id="tab-chatbot-planes" class="px-8 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-ui-desc hover:bg-white/50 transition-all outline-none focus:outline-none opacity-70">Planes</button>
-                    </div>
-                </div>
-
-                <div class="w-full flex-1 overflow-y-auto no-scrollbar scroll-area flex flex-col md:justify-center">
-                    <div class="max-w-[1400px] mx-auto w-full">
-                        
-                        <div id="content-chatbot-info" class="flex flex-col md:flex-row-reverse items-center justify-between gap-10 md:gap-16 w-full fade-in pb-10 md:pb-0">
-                            
-                            <div class="w-full lg:w-[42%] text-left shrink-0">
-                                <h2 class="font-bold mb-4 text-ui-titulo-1 leading-tight font-serif js-dynamic-title" id="ui-tit-chatbot"></h2>
-                                <p class="text-ui-desc text-sm md:text-lg leading-relaxed font-medium mb-8 opacity-90" id="ui-desc-chatbot"></p>
-                                <a href="#" target="_blank" class="js-wa-link inline-flex items-center justify-center bg-ui-btn-bg text-ui-btn-text hover:opacity-90 transition-all px-10 py-4 rounded-full font-bold text-xs md:text-sm tracking-widest uppercase shadow-lg w-fit" id="ui-cta-info-chatbot"></a>
-                            </div>
-
-                            <div class="w-full lg:w-[50%] relative group shadow-2xl rounded-2xl cursor-pointer shrink-0" onclick="openVideoModal()">
-                                <div class="relative bg-black border border-sg-border-light rounded-2xl overflow-hidden aspect-video md:aspect-[16/10] flex items-center justify-center">
-                                    <img id="img-chatbot-preview" src="" alt="Previsualización Chatbot" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100">
-                                    <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-colors">
-                                        <div class="w-20 h-20 bg-ui-btn-bg text-ui-btn-text rounded-full flex items-center justify-center shadow-xl transform group-hover:scale-110 transition-transform">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16"><path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/></svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div id="content-chatbot-planes" class="hidden grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto w-full fade-in pb-10 md:pb-0"></div>
-
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="slide bg-ui-bg-claro" id="slide-5">
+        <section class="slide bg-ui-bg-claro" id="slide-4">
             <div class="w-full h-full flex flex-col items-center justify-center px-6 pt-4 md:pt-[90px]">
-                <h2 id="ui-titulo-equipo" class="font-bold mb-4 text-ui-titulo-1 leading-tight font-serif js-dynamic-title"></h2>
-                <p id="ui-desc-equipo" class="text-ui-desc mb-12 text-sm md:text-lg font-semibold max-w-2xl mx-auto"></p>
-                
+                <h2 id="ui-titulo-equipo"
+                    class="font-bold mb-4 text-ui-titulo-1 leading-tight font-serif js-dynamic-title"></h2>
+                <p id="ui-desc-equipo" class="text-ui-desc mb-12 text-sm md:text-lg font-semibold max-w-2xl mx-auto">
+                </p>
+
                 <div class="grid grid-cols-2 gap-4 md:gap-8 max-w-4xl mx-auto w-full pb-8">
-                    <div class="relative group overflow-hidden bg-white border border-sg-border-light aspect-[4/5] md:aspect-square shadow-lg rounded-xl">
-                        <img id="img-jhonatan" src="" alt="Jhonatan Flores" class="w-full h-full object-cover object-top opacity-95">
-                        <div class="absolute bottom-0 left-0 w-full p-4 md:p-8 text-left bg-gradient-to-t from-black/80 via-black/50 to-transparent">
-                            <p class="text-[9px] md:text-xs uppercase tracking-widest font-bold text-ui-btn-bg mb-1">Lead Engineer</p>
+                    <div
+                        class="relative group overflow-hidden bg-white border border-sg-border-light aspect-[4/5] md:aspect-square shadow-lg rounded-xl">
+                        <img id="img-jhonatan" src="" alt="Jhonatan Flores"
+                            class="w-full h-full object-cover object-top opacity-95">
+                        <div
+                            class="absolute bottom-0 left-0 w-full p-4 md:p-8 text-left bg-gradient-to-t from-black/80 via-black/50 to-transparent">
+                            <p class="text-[9px] md:text-xs uppercase tracking-widest font-bold text-ui-btn-bg mb-1">
+                                Lead Engineer</p>
                             <h3 class="text-sm md:text-2xl font-serif text-white font-bold">Jhonatan Flores C.</h3>
                         </div>
                     </div>
-                    <div class="relative group overflow-hidden bg-white border border-sg-border-light aspect-[4/5] md:aspect-square shadow-lg rounded-xl">
-                        <img id="img-wendy" src="" alt="Wendy Paucara" class="w-full h-full object-cover object-top opacity-95">
-                        <div class="absolute bottom-0 left-0 w-full p-4 md:p-8 text-left bg-gradient-to-t from-black/80 via-black/50 to-transparent">
-                            <p class="text-[9px] md:text-xs uppercase tracking-widest font-bold text-ui-btn-bg mb-1">Co-Founder</p>
+                    <div
+                        class="relative group overflow-hidden bg-white border border-sg-border-light aspect-[4/5] md:aspect-square shadow-lg rounded-xl">
+                        <img id="img-wendy" src="" alt="Wendy Paucara"
+                            class="w-full h-full object-cover object-top opacity-95">
+                        <div
+                            class="absolute bottom-0 left-0 w-full p-4 md:p-8 text-left bg-gradient-to-t from-black/80 via-black/50 to-transparent">
+                            <p class="text-[9px] md:text-xs uppercase tracking-widest font-bold text-ui-btn-bg mb-1">
+                                Co-Founder</p>
                             <h3 class="text-sm md:text-2xl font-serif text-white font-bold">Wendy Paucara</h3>
                         </div>
-                    </div>     
+                    </div>
                 </div>
             </div>
         </section>
@@ -294,13 +435,13 @@
 
     <script>
         const setHTML = (id, htmlContent) => { const el = document.getElementById(id); if (el) el.innerHTML = htmlContent; };
-        const setImg = (id, src) => { const el = document.getElementById(id); if(el) el.src = src; };
+        const setImg = (id, src) => { const el = document.getElementById(id); if (el) el.src = src; };
 
         // =========================================================================
         // ⚙️ PANEL DE CONTROL MAESTRO (EDITA TODO DESDE AQUÍ)
         // =========================================================================
         const GLOBAL_CONFIG = {
-            
+
             // ==========================================
             // 🏷️ IDENTIDAD Y MARCA (Centralizado)
             // ==========================================
@@ -320,42 +461,42 @@
             tipografia: {
                 fuenteTitulos: "Playfair Display",
                 fuenteParrafos: "Inter",
-                fuenteMenu: "Inter",          
-                fuenteTarjetas: "Playfair Display", 
+                fuenteMenu: "Inter",
+                fuenteTarjetas: "Playfair Display",
                 urlGoogleFonts: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap",
-                
+
                 tamanos: {
-                    menu: "text-xs md:text-sm",                      
-                    titulos: "text-3xl md:text-5xl lg:text-6xl",     
-                    tarjetaTitulo: "text-xl md:text-2xl",            
+                    menu: "text-xs md:text-sm",
+                    titulos: "text-3xl md:text-5xl lg:text-6xl",
+                    tarjetaTitulo: "text-xl md:text-2xl",
                     tarjetaPrecio: "text-4xl md:text-5xl lg:text-6xl"
                 }
             },
-            
+
             // ==========================================
             // EDICIÓN ABSOLUTA DE COLORES 
             // ==========================================
             coloresUI: {
-                fondoPrincipalClaro: "#FFFFFF",      
-                fondoSutilClaro: "#FFFFFF",          
-                logoSpin: "#32698F",                 
-                logoGamma: "#B95221",                
-                menuEnlaces: "#1E3D51",              
-                menuLineaDivisoria: "#32698F",       
-                menuBotonBorde: "#32698F",           
-                menuBotonTexto: "#32698F",           
-                menuBotonHoverFondo: "#32698F",      
-                menuBotonHoverTexto: "#FFFFFF",      
-                tituloColorPrincipal: "#1E3D51",     
-                tituloColorResaltado: "#B95221",     
-                textoDescripcion: "#1E3D51",         
-                botonFondo: "#32698F",               
-                botonTexto: "#FFFFFF",               
-                tarjetaTitulo: "#B95221",            
-                tarjetaPrecio: "#32698F",            
-                colorBordesCajas: "#32698F"          
+                fondoPrincipalClaro: "#FFFFFF",
+                fondoSutilClaro: "#FFFFFF",
+                logoSpin: "#32698F",
+                logoGamma: "#B95221",
+                menuEnlaces: "#1E3D51",
+                menuLineaDivisoria: "#32698F",
+                menuBotonBorde: "#32698F",
+                menuBotonTexto: "#32698F",
+                menuBotonHoverFondo: "#32698F",
+                menuBotonHoverTexto: "#FFFFFF",
+                tituloColorPrincipal: "#1E3D51",
+                tituloColorResaltado: "#B95221",
+                textoDescripcion: "#1E3D51",
+                botonFondo: "#32698F",
+                botonTexto: "#FFFFFF",
+                tarjetaTitulo: "#B95221",
+                tarjetaPrecio: "#32698F",
+                colorBordesCajas: "#32698F"
             },
-            
+
             // ==========================================
             // TEXTOS Y PLANES (TASA DE CAMBIO 1 USD = 9.50 Bs)
             // ==========================================
@@ -363,137 +504,64 @@
                 navItem1: "Inicio",
                 navItem2: "Tarjetoso", // Antes SpinJob
                 navItem3: "Tarjetas",
-                navItem4: "Landing",
-                navItem5: "Chatbots",
-                navItem6: "Equipo",
+                navItem4: "Menús",
+                navItem5: "Equipo",
                 botonNavHeader: "CONTÁCTANOS",
-        
+
                 tituloInicio: "De freelancer a empresa:<br><span class='text-ui-titulo-2'>tecnología que crece contigo.</span>",
                 descInicio: "Acompañamos la evolución de tu negocio con infraestructura web y automatización escalable.",
                 botonHero: "Descubre el Camino",
-    
+
                 titRed: "La Red Tarjetoso", // Antes SpinJob
                 descRed: "Únete a nuestra red laboral y convierte tus perfiles en verdaderos activos de venta. Encuentra oportunidades y clientes en un solo lugar.",
-                
-                titTarjetas: "Tarjetas de Presentación 2.0",
-                descTarjetas: "El fin de las tarjetas de papel. Obtén tu tarjeta QR digital, comparte tus redes sociales, ubicación y catálogos en un solo toque directo al teléfono de tu cliente.",
-                ctaInfoTarjetas: "Consultar Diseño Base",
-                
+
+                titTarjetas: "Tu Tarjeta de Presentación Digital",
+                descTarjetas: "Al formar parte de la Red Tarjetoso, obtienes tu tarjeta QR digital como beneficio clave para tu negocio. Olvídate de las tarjetas impresas y comparte tus redes sociales, WhatsApp, geolocalización y catálogo interactivo en un solo toque directo al teléfono de tu cliente.",
+                ctaInfoTarjetas: "Obtener mi Tarjeta",
+
                 planesTarjetas: [
-                    { 
-                        nombre: "Básico", 
-                        precio: "Bs154", 
-                        freq: "/año", 
-                        desc: "Tu primera gran impresión", 
-                        features: [
-                            "Perfil en red laboral Tarjetoso", 
-                            "Botones directos a tu WhatsApp y GPS", 
-                            "Código QR descargable (¡Listo para imprimir!)",
-                            "1 Actualización de datos anual incluida"
-                        ] 
-                    },
-                    { 
-                        nombre: "Profesional", 
-                        precio: "Bs350", 
-                        freq: "/año", 
-                        desc: "Imagen de alto nivel y prestigio", 
+                    {
+                        nombre: "Básico",
+                        precio: "Bs154",
+                        freq: "/año",
+                        desc: "Tu primera gran impresión",
                         features: [
                             "Perfil en red laboral Tarjetoso",
-                            "Diseño Corporativo Unificado Premium", 
-                            "Catálogo de redes: TikTok, FB, IG, LinkedIn", 
+                            "Botones directos a tu WhatsApp y GPS",
+                            "Código QR descargable (¡Listo para imprimir!)",
+                            "1 Actualización de datos anual incluida"
+                        ]
+                    },
+                    {
+                        nombre: "Profesional",
+                        precio: "Bs350",
+                        freq: "/año",
+                        desc: "Imagen de alto nivel y prestigio",
+                        features: [
+                            "Perfil en red laboral Tarjetoso",
+                            "Diseño Corporativo Unificado Premium",
+                            "Catálogo de redes: TikTok, FB, IG, LinkedIn",
                             "1 Actualización trimestral incluida",
                             "Suma perfiles de tu equipo (+Bs78 c/u)"
-                        ] 
+                        ]
                     }
                 ],
 
-                titLanding: "Sucursales Virtuales (Landing)",
-                descLanding: "Multiplica tu conversión con páginas diseñadas psicológicamente para vender. No es un simple folleto web, es un embudo estructurado para captar leads sin distracciones.",
-                ctaInfoLanding: "Asesoría para mi Landing",
-                
-                planesLanding: [
-                    { 
-                        nombre: "Presencia Web", 
-                        precio: "Bs2350", 
-                        freq: "Diseño (Pago Único)", 
-                        desc: "Tu firma digital en internet", 
-                        features: [
-                            "Alquiler y Soporte: Bs195 mensuales",
-                            "Tu negocio visible en internet 24/7", 
-                            "Recepción directa de clientes a tu celular", 
-                            "Mantenimiento rápido bajo demanda"
-                        ] 
-                    },
-                    { 
-                        nombre: "Captura Activa", 
-                        precio: "Bs3106", 
-                        freq: "Diseño (Pago Único)", 
-                        desc: "Filtra curiosos, atrae clientes", 
-                        features: [
-                            "Servidor y Dominio: Bs292 mensuales",
-                            "Bot de captura: Guarda y te notifica del cliente", 
-                            "Incluye 1 Correo Corporativo Profesional", 
-                            "Soporta tráfico constante sin caerse"
-                        ] 
-                    },
-                    { 
-                        nombre: "Operación Escalable", 
-                        precio: "Bs3719", 
-                        freq: "Diseño (Pago Único)", 
-                        desc: "La experiencia Deluxe total", 
-                        features: [
-                            "Servidor Ultra-Rápido: Bs505 mensuales",
-                            "Dominio .COM propio y correos Google", 
-                            "IA atiende y centraliza tu lista de clientes", 
-                            "Capacidad masiva para miles de visitas"
-                        ] 
-                    }
-                ],
-
-                titChatbot: "Empleados Digitales IA",
-                descChatbot: "Atención automática 24/7. No pierdas más ventas por demorar en responder. Nuestros agentes de Inteligencia Artificial filtran prospectos, agendan citas y cierran ventas de forma natural.",
-                ctaInfoChatbot: "Evaluar mi Bot Ideal",
-                
-                planesChatbot: [
-                    { 
-                        nombre: "Recepcionista", 
-                        precio: "Bs971", 
-                        freq: "Configuración inicial (Pago Único)", 
-                        desc: "Orden total en tu agenda de reservas", 
-                        features: [
-                            "Sueldo de tu Bot: Bs389 mensuales",
-                            "Agenda hasta 500 reservas automáticamente",  
-                            "Responde 24/7 por mensaje de texto"
-                        ] 
-                    },
-                    { 
-                        nombre: "Asistente IA", 
-                        precio: "Bs1068", 
-                        freq: "Configuración inicial (Pago Único)", 
-                        desc: "Atención premium y automatización total", 
-                        features: [
-                            "Sueldo de tu Bot IA: Bs583 mensuales",
-                            "Gestiona hasta 1,000 citas con precisión", 
-                            "La IA lee PDFs, clasifica y recuerda conversaciones (2 semanas)", 
-                            "Escucha audios de voz y agenda directo al sistema"
-                        ] 
-                    }
-                ],
+                titMenus: "Menús Digitales e Interactivos",
+                descMenus: "Lleva tu restaurante o negocio al siguiente nivel. Tus clientes escanean el código QR, ven tu menú interactivo, seleccionan sus productos y realizan pedidos directo a tu WhatsApp o sistema de gestión, reduciendo tiempos de espera y optimizando tus ventas sin comisiones.",
+                ctaInfoMenus: "Asesoría para mi Menú",
 
                 tituloEquipo: "Los Arquitectos de tu Sistema",
                 descEquipo: "Acompañamiento técnico de alto nivel en cada fase."
             },
-            
+
             imagenes: {
                 fotoJhonatan: "jhona.jpg",
                 fotoWendy: "wendy.jpeg",
-                imgRed: "SpinJob.png",       
-                imgTarjetas: "TarjetasDigitalesImage.png", 
-                imgLanding: "landing-page-demo.png", 
-                imgVidPlaceholder: "PreviewChatbot.png" 
-            },
-            videos: {
-                vidChatbot: "video.mp4"
+                imgRed: "tarjetoso.png",
+                imgTarjetas: "TarjetasDigitales.png",
+                imgMenus1: "MenusDigitales.png",
+                imgMenus2: "GestionarPedidos.png"
             }
         };
 
@@ -504,17 +572,17 @@
             const tabInfo = document.getElementById(`tab-${seccion}-info`);
             const tabPlanes = document.getElementById(`tab-${seccion}-planes`);
 
-            if(!contentInfo || !contentPlanes) return;
+            if (!contentInfo || !contentPlanes) return;
 
             if (tab === 'info') {
                 contentInfo.classList.remove('hidden');
                 contentInfo.classList.add('flex');
                 contentPlanes.classList.add('hidden');
-                contentPlanes.classList.remove('grid'); 
-                
+                contentPlanes.classList.remove('grid');
+
                 tabInfo.classList.add('bg-ui-btn-bg', 'text-ui-btn-text');
                 tabInfo.classList.remove('text-ui-desc', 'hover:bg-white/50', 'opacity-70');
-                
+
                 tabPlanes.classList.remove('bg-ui-btn-bg', 'text-ui-btn-text');
                 tabPlanes.classList.add('text-ui-desc', 'hover:bg-white/50', 'opacity-70');
             } else {
@@ -522,10 +590,10 @@
                 contentInfo.classList.remove('flex');
                 contentPlanes.classList.remove('hidden');
                 contentPlanes.classList.add('grid');
-                
+
                 tabPlanes.classList.add('bg-ui-btn-bg', 'text-ui-btn-text');
                 tabPlanes.classList.remove('text-ui-desc', 'hover:bg-white/50', 'opacity-70');
-                
+
                 tabInfo.classList.remove('bg-ui-btn-bg', 'text-ui-btn-text');
                 tabInfo.classList.add('text-ui-desc', 'hover:bg-white/50', 'opacity-70');
             }
@@ -537,9 +605,9 @@
             planesArray.forEach(plan => {
                 const msj = `Hola, me interesa el Plan ${plan.nombre} de ${productoContexto}. ¿Me dan más información?`;
                 const linkWa = `https://wa.me/${GLOBAL_CONFIG.identidad.whatsapp}?text=${encodeURIComponent(msj)}`;
-                
+
                 let featuresHTML = '';
-                if(plan.features && plan.features.length > 0) {
+                if (plan.features && plan.features.length > 0) {
                     plan.features.forEach(f => {
                         featuresHTML += `
                         <li class="flex items-start gap-2 text-sm text-ui-desc opacity-90 mb-3">
@@ -587,29 +655,29 @@
             // COLORES 
             root.style.setProperty('--ui-bg-oscuro', GLOBAL_CONFIG.coloresUI.fondoPrincipalClaro);
             root.style.setProperty('--ui-bg-claro', GLOBAL_CONFIG.coloresUI.fondoSutilClaro);
-            
+
             root.style.setProperty('--ui-logo-spin', GLOBAL_CONFIG.coloresUI.logoSpin);
             root.style.setProperty('--ui-logo-gamma', GLOBAL_CONFIG.coloresUI.logoGamma);
-            
+
             root.style.setProperty('--ui-nav-text', GLOBAL_CONFIG.coloresUI.menuEnlaces);
             root.style.setProperty('--ui-linea-menu', GLOBAL_CONFIG.coloresUI.menuLineaDivisoria);
-            
+
             root.style.setProperty('--ui-nav-cta-border', GLOBAL_CONFIG.coloresUI.menuBotonBorde);
             root.style.setProperty('--ui-nav-cta-text', GLOBAL_CONFIG.coloresUI.menuBotonTexto);
             root.style.setProperty('--ui-nav-cta-hover-bg', GLOBAL_CONFIG.coloresUI.menuBotonHoverFondo);
             root.style.setProperty('--ui-nav-cta-hover-text', GLOBAL_CONFIG.coloresUI.menuBotonHoverTexto);
-            
+
             root.style.setProperty('--ui-titulo-1', GLOBAL_CONFIG.coloresUI.tituloColorPrincipal);
             root.style.setProperty('--ui-titulo-2', GLOBAL_CONFIG.coloresUI.tituloColorResaltado);
             root.style.setProperty('--ui-desc', GLOBAL_CONFIG.coloresUI.textoDescripcion);
-            
+
             root.style.setProperty('--ui-btn-bg', GLOBAL_CONFIG.coloresUI.botonFondo);
             root.style.setProperty('--ui-btn-text', GLOBAL_CONFIG.coloresUI.botonTexto);
-            
+
             root.style.setProperty('--ui-tarj-tit', GLOBAL_CONFIG.coloresUI.tarjetaTitulo);
             root.style.setProperty('--ui-tarj-precio', GLOBAL_CONFIG.coloresUI.tarjetaPrecio);
             root.style.setProperty('--sg-border-light', GLOBAL_CONFIG.coloresUI.colorBordesCajas);
-            
+
             // APLICAR TAMAÑOS
             const menuContainer = document.getElementById('menu-container');
             if (menuContainer) menuContainer.classList.add(...GLOBAL_CONFIG.tipografia.tamanos.menu.split(' '));
@@ -617,41 +685,36 @@
             document.querySelectorAll('.js-dynamic-title').forEach(el => {
                 el.classList.add(...GLOBAL_CONFIG.tipografia.tamanos.titulos.split(' '));
             });
-            
+
             // INYECTAR TEXTOS
             setHTML('logo-spin', GLOBAL_CONFIG.identidad.empresaPart1);
             setHTML('logo-gamma', GLOBAL_CONFIG.identidad.empresaPart2);
-            
+
             setHTML('ui-nav-1', GLOBAL_CONFIG.textosUI.navItem1);
             setHTML('ui-nav-2', GLOBAL_CONFIG.textosUI.navItem2);
             setHTML('ui-nav-3', GLOBAL_CONFIG.textosUI.navItem3);
             setHTML('ui-nav-4', GLOBAL_CONFIG.textosUI.navItem4);
             setHTML('ui-nav-5', GLOBAL_CONFIG.textosUI.navItem5);
-            setHTML('ui-nav-6', GLOBAL_CONFIG.textosUI.navItem6);
             document.querySelectorAll('.ui-texto-nav-btn').forEach(el => { el.innerHTML = GLOBAL_CONFIG.textosUI.botonNavHeader; });
 
             setHTML('ui-titulo-inicio', GLOBAL_CONFIG.textosUI.tituloInicio);
             setHTML('ui-desc-inicio', GLOBAL_CONFIG.textosUI.descInicio);
             setHTML('ui-texto-btn-hero', GLOBAL_CONFIG.textosUI.botonHero);
-            
+
             setHTML('ui-tit-spinjob', GLOBAL_CONFIG.textosUI.titRed);
             setHTML('ui-desc-spinjob', GLOBAL_CONFIG.textosUI.descRed);
-            
+
             setHTML('ui-tit-tarjetas', GLOBAL_CONFIG.textosUI.titTarjetas);
             setHTML('ui-desc-tarjetas', GLOBAL_CONFIG.textosUI.descTarjetas);
             setHTML('ui-cta-info-tarjetas', GLOBAL_CONFIG.textosUI.ctaInfoTarjetas);
             setHTML('content-tarjetas-planes', generarPlanesHTML(GLOBAL_CONFIG.textosUI.planesTarjetas, GLOBAL_CONFIG.identidad.nombreRed));
 
-            setHTML('ui-tit-landing', GLOBAL_CONFIG.textosUI.titLanding);
-            setHTML('ui-desc-landing', GLOBAL_CONFIG.textosUI.descLanding);
-            setHTML('ui-cta-info-landing', GLOBAL_CONFIG.textosUI.ctaInfoLanding);
-            setHTML('content-landing-planes', generarPlanesHTML(GLOBAL_CONFIG.textosUI.planesLanding, "Landing Pages"));
+            setHTML('ui-tit-menus', GLOBAL_CONFIG.textosUI.titMenus);
+            setHTML('ui-desc-menus', GLOBAL_CONFIG.textosUI.descMenus);
+            setHTML('ui-cta-info-menus', GLOBAL_CONFIG.textosUI.ctaInfoMenus);
 
-            setHTML('ui-tit-chatbot', GLOBAL_CONFIG.textosUI.titChatbot);
-            setHTML('ui-desc-chatbot', GLOBAL_CONFIG.textosUI.descChatbot);
-            setHTML('ui-cta-info-chatbot', GLOBAL_CONFIG.textosUI.ctaInfoChatbot);
-            setHTML('content-chatbot-planes', generarPlanesHTML(GLOBAL_CONFIG.textosUI.planesChatbot, "Chatbots IA"));
-            
+
+
             setHTML('ui-titulo-equipo', GLOBAL_CONFIG.textosUI.tituloEquipo);
             setHTML('ui-desc-equipo', GLOBAL_CONFIG.textosUI.descEquipo);
 
@@ -660,22 +723,81 @@
             setImg('img-wendy', GLOBAL_CONFIG.imagenes.fotoWendy);
             setImg('img-spinjob', GLOBAL_CONFIG.imagenes.imgRed);
             setImg('img-tarjetas', GLOBAL_CONFIG.imagenes.imgTarjetas);
-            setImg('img-landing', GLOBAL_CONFIG.imagenes.imgLanding);
-            setImg('img-chatbot-preview', GLOBAL_CONFIG.imagenes.imgVidPlaceholder); 
+            setImg('img-menus-carousel-1', GLOBAL_CONFIG.imagenes.imgMenus1);
+            setImg('img-menus-carousel-2', GLOBAL_CONFIG.imagenes.imgMenus2);
+
+            // Inicializar Carrusel de Menús
+            updateMenuCarousel();
 
             // ENLACES
             const btnRed = document.getElementById('btn-spinjob');
-            if(btnRed) btnRed.href = GLOBAL_CONFIG.identidad.urlRed;
+            if (btnRed) btnRed.href = GLOBAL_CONFIG.identidad.urlRed;
 
             const waLinks = document.querySelectorAll('.js-wa-link');
             const waUrlBase = `https://wa.me/${GLOBAL_CONFIG.identidad.whatsapp}?text=${encodeURIComponent(GLOBAL_CONFIG.identidad.mensajeWA)}`;
             waLinks.forEach(link => { link.href = waUrlBase; });
         });
 
+        // LÓGICA DE CARRUSEL DE MENÚS
+        let currentMenuSlide = 0;
+        const totalMenuSlides = 2;
+        let menusCarouselInterval = setInterval(nextMenuSlide, 4000);
+
+        function resetMenusCarouselInterval() {
+            clearInterval(menusCarouselInterval);
+            menusCarouselInterval = setInterval(nextMenuSlide, 4000);
+        }
+
+        function updateMenuCarousel() {
+            const container = document.getElementById('menus-carousel-slides');
+            if (container) {
+                container.style.transform = `translateX(-${currentMenuSlide * 100}%)`;
+            }
+            const dots = document.querySelectorAll('.menus-carousel-dot');
+            dots.forEach((dot, index) => {
+                if (index === currentMenuSlide) {
+                    dot.style.opacity = '1';
+                    dot.style.transform = 'scale(1.2)';
+                    dot.style.backgroundColor = GLOBAL_CONFIG.coloresUI.botonFondo;
+                } else {
+                    dot.style.opacity = '0.45';
+                    dot.style.transform = 'scale(1)';
+                    dot.style.backgroundColor = '#FFFFFF';
+                }
+            });
+        }
+
+        function nextMenuSlide(e) {
+            if (e) {
+                e.stopPropagation();
+                resetMenusCarouselInterval();
+            }
+            currentMenuSlide = (currentMenuSlide + 1) % totalMenuSlides;
+            updateMenuCarousel();
+        }
+
+        function prevMenuSlide(e) {
+            if (e) {
+                e.stopPropagation();
+                resetMenusCarouselInterval();
+            }
+            currentMenuSlide = (currentMenuSlide - 1 + totalMenuSlides) % totalMenuSlides;
+            updateMenuCarousel();
+        }
+
+        function setMenuSlide(index, e) {
+            if (e) {
+                e.stopPropagation();
+                resetMenusCarouselInterval();
+            }
+            currentMenuSlide = index;
+            updateMenuCarousel();
+        }
+
         // NAVEGACIÓN Y SCROLL
         const slides = document.querySelectorAll('.slide');
         const navLinks = document.querySelectorAll('.nav-link');
-        const totalSlides = slides.length; 
+        const totalSlides = slides.length;
         let currentSlide = 0;
         let isAnimating = false;
 
@@ -683,19 +805,19 @@
             if (isAnimating || index === currentSlide || index < 0 || index >= totalSlides) return;
             isAnimating = true;
             slides[currentSlide].classList.remove('active');
-            if (index > currentSlide) { slides[currentSlide].classList.add('prev-slide'); } 
+            if (index > currentSlide) { slides[currentSlide].classList.add('prev-slide'); }
             else { slides[currentSlide].classList.remove('prev-slide'); }
-            
+
             // Forzar el reseteo de tabs al cambiar de vista
             toggleTab('tarjetas', 'info');
-            toggleTab('landing', 'info');
-            toggleTab('chatbot', 'info');
-            
+            currentMenuSlide = 0;
+            updateMenuCarousel();
+
             currentSlide = index;
-            slides.forEach((slide, i) => { if(i !== currentSlide) slide.classList.remove('active'); });
+            slides.forEach((slide, i) => { if (i !== currentSlide) slide.classList.remove('active'); });
             slides[currentSlide].classList.remove('prev-slide');
             slides[currentSlide].classList.add('active');
-            
+
             updateNav();
             setTimeout(() => { isAnimating = false; }, 800);
         }
@@ -706,11 +828,11 @@
                 if (parseInt(dot.dataset.target) === currentSlide) {
                     dot.style.opacity = '1';
                     dot.style.transform = 'scale(1.3)';
-                    dot.style.backgroundColor = GLOBAL_CONFIG.coloresUI.botonFondo; 
+                    dot.style.backgroundColor = GLOBAL_CONFIG.coloresUI.botonFondo;
                 } else {
                     dot.style.opacity = '0.3';
                     dot.style.transform = 'scale(1)';
-                    dot.style.backgroundColor = GLOBAL_CONFIG.coloresUI.tituloColorPrincipal; 
+                    dot.style.backgroundColor = GLOBAL_CONFIG.coloresUI.tituloColorPrincipal;
                 }
             });
 
@@ -722,73 +844,28 @@
             });
         }
 
-        // MODALES
-        const modal = document.getElementById('video-modal');
-        const modalPlayer = document.getElementById('modal-player');
-
-        function openVideoModal() {
-            modalPlayer.classList.remove('hidden');
-            modalPlayer.querySelector('source').src = GLOBAL_CONFIG.videos.vidChatbot;
-            modalPlayer.load();
-            modal.classList.add('active');
-            modalPlayer.play();
-        }
-
-        function openMediaModal(type) {
-            if(type === 'image'){
-                modalPlayer.classList.add('hidden');
-                modalPlayer.pause();
-                
-                const imgPreview = document.createElement('img');
-                imgPreview.src = GLOBAL_CONFIG.imagenes.imgLanding;
-                imgPreview.id = 'modal-temp-img';
-                imgPreview.className = 'w-full h-full object-contain bg-[#152633] absolute top-0 left-0';
-                
-                modalPlayer.parentElement.appendChild(imgPreview);
-                modal.classList.add('active');
-            }
-        }
-
-        function closeVideoModal(event) {
-            if(event) event.stopPropagation(); 
-            modal.classList.remove('active');
-            
-            modalPlayer.pause(); 
-            modalPlayer.currentTime = 0; 
-            modalPlayer.querySelector('source').src = ""; 
-            
-            const tempImg = document.getElementById('modal-temp-img');
-            if(tempImg) tempImg.remove();
-        }
-
         window.addEventListener('wheel', (e) => {
-            if(modal.classList.contains('active')) return; 
-            if (e.target.closest('.scroll-area') || e.target.closest('.grid')) return; 
+            if (e.target.closest('.scroll-area') || e.target.closest('.grid')) return;
             const isHorizontalScroll = Math.abs(e.deltaX) > Math.abs(e.deltaY);
-            if(!isHorizontalScroll) {
+            if (!isHorizontalScroll) {
                 if (e.deltaY > 0) goToSlide(currentSlide + 1);
                 else if (e.deltaY < 0) goToSlide(currentSlide - 1);
             }
         });
 
         let touchStartY = 0; let touchEndY = 0; let touchStartX = 0; let touchEndX = 0; let touchTarget = null;
-        window.addEventListener('touchstart', e => { touchStartY = e.changedTouches[0].screenY; touchStartX = e.changedTouches[0].screenX; touchTarget = e.target; }, {passive: true});
+        window.addEventListener('touchstart', e => { touchStartY = e.changedTouches[0].screenY; touchStartX = e.changedTouches[0].screenX; touchTarget = e.target; }, { passive: true });
         window.addEventListener('touchend', e => {
-            if(modal.classList.contains('active')) return; 
             touchEndY = e.changedTouches[0].screenY; touchEndX = e.changedTouches[0].screenX;
-            if (touchTarget && (touchTarget.closest('.scroll-area') || touchTarget.closest('.grid'))) return; 
+            if (touchTarget && (touchTarget.closest('.scroll-area') || touchTarget.closest('.grid'))) return;
             const swipeThreshold = 50; const yDiff = touchStartY - touchEndY; const xDiff = touchStartX - touchEndX;
             if (Math.abs(yDiff) > Math.abs(xDiff)) {
-                if (yDiff > swipeThreshold) { goToSlide(currentSlide + 1); } 
+                if (yDiff > swipeThreshold) { goToSlide(currentSlide + 1); }
                 else if (yDiff < -swipeThreshold) { goToSlide(currentSlide - 1); }
             }
-        }, {passive: true});
+        }, { passive: true });
 
         window.addEventListener('keydown', (e) => {
-            if(modal.classList.contains('active')) {
-                if(e.key === 'Escape') closeVideoModal(); 
-                return;
-            }
             if (e.key === 'ArrowDown') goToSlide(currentSlide + 1);
             if (e.key === 'ArrowUp') goToSlide(currentSlide - 1);
         });
@@ -796,4 +873,5 @@
         updateNav();
     </script>
 </body>
+
 </html>
