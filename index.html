@@ -234,28 +234,52 @@
         </section>
 
         <section class="slide bg-ui-bg-claro" id="slide-1">
-            <div
-                class="max-w-[1400px] mx-auto w-full h-full px-6 md:px-12 flex flex-col md:flex-row items-center justify-start md:justify-between gap-8 md:gap-16 pt-4 md:pt-[90px] pb-10 overflow-y-auto no-scrollbar">
+            <div class="w-full h-full px-6 md:px-12 flex flex-col pt-4 md:pt-[110px] pb-10">
 
-                <div class="w-full lg:w-[42%] flex flex-col text-left shrink-0">
+                <div class="flex justify-center w-full shrink-0 mb-6 z-20">
                     <div
-                        class="inline-block px-3 py-1 bg-ui-btn-bg/10 border border-ui-btn-bg/30 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest text-ui-btn-bg mb-4 w-fit">
-                        Paso 1: Organización
+                        class="inline-flex bg-white/60 backdrop-blur-sm border border-sg-border-light rounded-full p-1 shadow-sm">
+                        <button onclick="toggleTab('tarjetoso', 'info')" id="tab-tarjetoso-info"
+                            class="px-8 py-2 rounded-full text-xs font-bold uppercase tracking-widest bg-ui-btn-bg text-ui-btn-text transition-all outline-none focus:outline-none">Qué
+                            es</button>
+                        <button onclick="toggleTab('tarjetoso', 'planes')" id="tab-tarjetoso-planes"
+                            class="px-8 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-ui-desc hover:bg-white/50 transition-all outline-none focus:outline-none opacity-70">Planes</button>
                     </div>
-                    <h2 class="font-bold mb-6 text-ui-titulo-1 leading-tight font-serif js-dynamic-title"
-                        id="ui-tit-spinjob"></h2>
-                    <p class="text-ui-desc mb-8 text-sm md:text-lg leading-relaxed font-medium opacity-90"
-                        id="ui-desc-spinjob"></p>
-                    <a id="btn-spinjob" href="#" target="_blank"
-                        class="inline-flex items-center justify-center gap-2 bg-ui-btn-bg text-ui-btn-text hover:opacity-90 transition-all px-10 py-4 rounded-full font-bold text-xs md:text-sm tracking-widest uppercase shadow-lg w-fit">
-                        Ir a la Plataforma
-                    </a>
                 </div>
 
-                <div class="w-full lg:w-[50%] relative group shadow-2xl rounded-2xl shrink-0">
-                    <div
-                        class="relative bg-white border border-sg-border-light rounded-2xl overflow-hidden aspect-video md:aspect-[16/10] flex items-center justify-center">
-                        <img id="img-spinjob" src="" alt="SpinJob" class="w-full h-full object-cover object-top">
+                <div class="w-full flex-1 overflow-y-auto no-scrollbar scroll-area flex flex-col md:justify-center">
+                    <div class="max-w-[1400px] mx-auto w-full">
+
+                        <div id="content-tarjetoso-info"
+                            class="flex flex-col md:flex-row items-center justify-between gap-10 md:gap-16 w-full fade-in pb-10 md:pb-0">
+                            <div class="w-full lg:w-[42%] flex flex-col text-left shrink-0">
+                                <div
+                                    class="inline-block px-3 py-1 bg-ui-btn-bg/10 border border-ui-btn-bg/30 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest text-ui-btn-bg mb-4 w-fit">
+                                    Paso 1: Organización
+                                </div>
+                                <h2 class="font-bold mb-6 text-ui-titulo-1 leading-tight font-serif js-dynamic-title"
+                                    id="ui-tit-spinjob"></h2>
+                                <p class="text-ui-desc mb-8 text-sm md:text-lg leading-relaxed font-medium opacity-90"
+                                    id="ui-desc-spinjob"></p>
+                                <a id="btn-spinjob" href="#" target="_blank"
+                                    class="inline-flex items-center justify-center gap-2 bg-ui-btn-bg text-ui-btn-text hover:opacity-90 transition-all px-10 py-4 rounded-full font-bold text-xs md:text-sm tracking-widest uppercase shadow-lg w-fit">
+                                    Ir a la Plataforma
+                                </a>
+                            </div>
+
+                            <div class="w-full lg:w-[50%] relative group shadow-2xl rounded-2xl shrink-0">
+                                <div
+                                    class="relative bg-white border border-sg-border-light rounded-2xl overflow-hidden aspect-video md:aspect-[16/10] flex items-center justify-center">
+                                    <img id="img-spinjob" src="" alt="SpinJob"
+                                        class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="content-tarjetoso-planes"
+                            class="hidden grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto w-full fade-in pb-10 md:pb-0">
+                        </div>
+
                     </div>
                 </div>
 
@@ -310,87 +334,116 @@
         </section>
 
         <section class="slide bg-ui-bg-claro" id="slide-3">
-            <div
-                class="max-w-[1400px] mx-auto w-full h-full px-6 md:px-12 flex flex-col md:flex-row items-center justify-start md:justify-between gap-8 md:gap-16 pt-4 md:pt-[90px] pb-10 overflow-y-auto no-scrollbar">
+            <div class="w-full h-full px-6 md:px-12 flex flex-col pt-4 md:pt-[110px] pb-10">
 
-                <div class="w-full lg:w-[42%] flex flex-col text-left shrink-0">
+                <div class="flex justify-center w-full shrink-0 mb-6 z-20">
                     <div
-                        class="inline-block px-3 py-1 bg-ui-btn-bg/10 border border-ui-btn-bg/30 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest text-ui-btn-bg mb-4 w-fit">
-                        Paso 3: Automatización
+                        class="inline-flex bg-white/60 backdrop-blur-sm border border-sg-border-light rounded-full p-1 shadow-sm">
+                        <button onclick="toggleTab('menus', 'info')" id="tab-menus-info"
+                            class="px-8 py-2 rounded-full text-xs font-bold uppercase tracking-widest bg-ui-btn-bg text-ui-btn-text transition-all outline-none focus:outline-none">Qué
+                            es</button>
+                        <button onclick="toggleTab('menus', 'planes')" id="tab-menus-planes"
+                            class="px-8 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-ui-desc hover:bg-white/50 transition-all outline-none focus:outline-none opacity-70">Planes</button>
                     </div>
-                    <h2 class="font-bold mb-6 text-ui-titulo-1 leading-tight font-serif js-dynamic-title"
-                        id="ui-tit-menus"></h2>
-                    <div class="text-ui-desc text-sm md:text-lg leading-relaxed font-medium mb-8 opacity-90 space-y-4">
-                        <p id="ui-desc-menus"></p>
-                        <ul class="space-y-3">
-                            <li class="flex items-start gap-2">
-                                <svg class="w-5 h-5 text-ui-btn-bg mt-0.5 shrink-0" fill="none" stroke="currentColor"
-                                    stroke-width="2.5" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span><strong>Pedidos directos:</strong> Recibe pedidos en tu panel de gestión.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <svg class="w-5 h-5 text-ui-btn-bg mt-0.5 shrink-0" fill="none" stroke="currentColor"
-                                    stroke-width="2.5" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span><strong>Control total:</strong> Actualiza precios, fotos y platos agotados al
-                                    instante.</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <a href="#" target="_blank"
-                        class="js-wa-link inline-flex items-center justify-center bg-ui-btn-bg text-ui-btn-text hover:opacity-90 transition-all px-10 py-4 rounded-full font-bold text-xs md:text-sm tracking-widest uppercase shadow-lg w-fit"
-                        id="ui-cta-info-menus"></a>
                 </div>
 
-                <!-- Carrusel de Imágenes de Menús -->
-                <div
-                    class="w-full lg:w-[50%] relative group shadow-2xl rounded-2xl shrink-0 overflow-hidden aspect-video md:aspect-[16/10] bg-white border border-sg-border-light">
-                    <!-- Slides Wrapper -->
-                    <div id="menus-carousel-slides"
-                        class="flex w-full h-full transition-transform duration-500 ease-out">
-                        <div class="w-full h-full shrink-0 flex items-center justify-center relative">
-                            <img id="img-menus-carousel-1" src="" alt="Menús Digitales"
-                                class="w-full h-full object-cover object-top">
-                            <div
-                                class="absolute bottom-4 left-4 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider z-20">
-                                Menús Digitales</div>
-                        </div>
-                        <div class="w-full h-full shrink-0 flex items-center justify-center relative">
-                            <img id="img-menus-carousel-2" src="" alt="Gestionar Pedidos"
-                                class="w-full h-full object-cover object-top">
-                            <div
-                                class="absolute bottom-4 left-4 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider z-20">
-                                Gestionar Pedidos</div>
-                        </div>
-                    </div>
+                <div class="w-full flex-1 overflow-y-auto no-scrollbar scroll-area flex flex-col md:justify-center">
+                    <div class="max-w-[1400px] mx-auto w-full">
 
-                    <!-- Botones de Navegación -->
-                    <button onclick="prevMenuSlide(event)"
-                        class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white text-ui-btn-bg rounded-full flex items-center justify-center shadow-lg transition-all focus:outline-none opacity-0 group-hover:opacity-100 z-30">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
-                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                            <polyline points="15 18 9 12 15 6"></polyline>
-                        </svg>
-                    </button>
-                    <button onclick="nextMenuSlide(event)"
-                        class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white text-ui-btn-bg rounded-full flex items-center justify-center shadow-lg transition-all focus:outline-none opacity-0 group-hover:opacity-100 z-30">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
-                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                            <polyline points="9 18 15 12 9 6"></polyline>
-                        </svg>
-                    </button>
+                        <div id="content-menus-info"
+                            class="flex flex-col md:flex-row items-center justify-between gap-10 md:gap-16 w-full fade-in pb-10 md:pb-0">
+                            <div class="w-full lg:w-[42%] flex flex-col text-left shrink-0">
+                                <div
+                                    class="inline-block px-3 py-1 bg-ui-btn-bg/10 border border-ui-btn-bg/30 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest text-ui-btn-bg mb-4 w-fit">
+                                    Paso 3: Automatización
+                                </div>
+                                <h2 class="font-bold mb-6 text-ui-titulo-1 leading-tight font-serif js-dynamic-title"
+                                    id="ui-tit-menus"></h2>
+                                <div
+                                    class="text-ui-desc text-sm md:text-lg leading-relaxed font-medium mb-8 opacity-90 space-y-4">
+                                    <p id="ui-desc-menus"></p>
+                                    <ul class="space-y-3">
+                                        <li class="flex items-start gap-2">
+                                            <svg class="w-5 h-5 text-ui-btn-bg mt-0.5 shrink-0" fill="none"
+                                                stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7">
+                                                </path>
+                                            </svg>
+                                            <span><strong>Pedidos directos:</strong> Recibe pedidos en tu panel de
+                                                gestión.</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <svg class="w-5 h-5 text-ui-btn-bg mt-0.5 shrink-0" fill="none"
+                                                stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7">
+                                                </path>
+                                            </svg>
+                                            <span><strong>Control total:</strong> Actualiza precios, fotos y platos
+                                                agotados al instante.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <a href="#" target="_blank"
+                                    class="js-wa-link inline-flex items-center justify-center bg-ui-btn-bg text-ui-btn-text hover:opacity-90 transition-all px-10 py-4 rounded-full font-bold text-xs md:text-sm tracking-widest uppercase shadow-lg w-fit"
+                                    id="ui-cta-info-menus"></a>
+                            </div>
 
-                    <!-- Indicadores (Dots) -->
-                    <div class="absolute bottom-4 right-4 flex gap-1.5 z-30">
-                        <button onclick="setMenuSlide(0, event)"
-                            class="menus-carousel-dot w-2.5 h-2.5 rounded-full bg-white opacity-45 transition-all"
-                            data-slide="0"></button>
-                        <button onclick="setMenuSlide(1, event)"
-                            class="menus-carousel-dot w-2.5 h-2.5 rounded-full bg-white opacity-45 transition-all"
-                            data-slide="1"></button>
+                            <!-- Carrusel de Imágenes de Menús -->
+                            <div
+                                class="w-full lg:w-[50%] relative group shadow-2xl rounded-2xl shrink-0 overflow-hidden aspect-video md:aspect-[16/10] bg-white border border-sg-border-light">
+                                <!-- Slides Wrapper -->
+                                <div id="menus-carousel-slides"
+                                    class="flex w-full h-full transition-transform duration-500 ease-out">
+                                    <div class="w-full h-full shrink-0 flex items-center justify-center relative">
+                                        <img id="img-menus-carousel-1" src="" alt="Menús Digitales"
+                                            class="w-full h-full object-cover object-top">
+                                        <div
+                                            class="absolute bottom-4 left-4 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider z-20">
+                                            Menús Digitales</div>
+                                    </div>
+                                    <div class="w-full h-full shrink-0 flex items-center justify-center relative">
+                                        <img id="img-menus-carousel-2" src="" alt="Gestionar Pedidos"
+                                            class="w-full h-full object-cover object-top">
+                                        <div
+                                            class="absolute bottom-4 left-4 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider z-20">
+                                            Gestionar Pedidos</div>
+                                    </div>
+                                </div>
+
+                                <!-- Botones de Navegación -->
+                                <button onclick="prevMenuSlide(event)"
+                                    class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white text-ui-btn-bg rounded-full flex items-center justify-center shadow-lg transition-all focus:outline-none opacity-0 group-hover:opacity-100 z-30">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+                                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <polyline points="15 18 9 12 15 6"></polyline>
+                                    </svg>
+                                </button>
+                                <button onclick="nextMenuSlide(event)"
+                                    class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white text-ui-btn-bg rounded-full flex items-center justify-center shadow-lg transition-all focus:outline-none opacity-0 group-hover:opacity-100 z-30">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+                                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <polyline points="9 18 15 12 9 6"></polyline>
+                                    </svg>
+                                </button>
+
+                                <!-- Indicadores (Dots) -->
+                                <div class="absolute bottom-4 right-4 flex gap-1.5 z-30">
+                                    <button onclick="setMenuSlide(0, event)"
+                                        class="menus-carousel-dot w-2.5 h-2.5 rounded-full bg-white opacity-45 transition-all"
+                                        data-slide="0"></button>
+                                    <button onclick="setMenuSlide(1, event)"
+                                        class="menus-carousel-dot w-2.5 h-2.5 rounded-full bg-white opacity-45 transition-all"
+                                        data-slide="1"></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="content-menus-planes"
+                            class="hidden grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto w-full fade-in pb-10 md:pb-0">
+                        </div>
+
                     </div>
                 </div>
 
@@ -519,30 +572,70 @@
                 descTarjetas: "Al formar parte de la Red Tarjetoso, obtienes tu tarjeta QR digital como beneficio clave para tu negocio. Olvídate de las tarjetas impresas y comparte tus redes sociales, WhatsApp, geolocalización y catálogo interactivo en un solo toque directo al teléfono de tu cliente.",
                 ctaInfoTarjetas: "Obtener mi Tarjeta",
 
-                planesTarjetas: [
+                planesRed: [
                     {
-                        nombre: "Básico",
-                        precio: "Bs154",
-                        freq: "/año",
-                        desc: "Tu primera gran impresión",
+                        nombre: "Gratis",
+                        precio: "Bs0",
+                        freq: "/gratis",
+                        desc: "Comienza a tener presencia en internet",
                         features: [
-                            "Perfil en red laboral Tarjetoso",
-                            "Botones directos a tu WhatsApp y GPS",
-                            "Código QR descargable (¡Listo para imprimir!)",
-                            "1 Actualización de datos anual incluida"
+                            "Perfil público en la Red Tarjetoso",
+                            "Catálogo de hasta 5 productos",
+                            "Pedidos: No disponible",
+                            "Hasta 2 números de WhatsApp",
+                            "Dashboard de métricas: No",
+                            "Insignia 'Verificado': No",
+                            "Soporte: Comunidad / FAQ"
                         ]
                     },
                     {
-                        nombre: "Profesional",
-                        precio: "Bs350",
-                        freq: "/año",
-                        desc: "Imagen de alto nivel y prestigio",
+                        nombre: "Premium",
+                        precio: "US$5",
+                        freq: "/mes",
+                        desc: "La máxima potencia para tu negocio",
                         features: [
-                            "Perfil en red laboral Tarjetoso",
-                            "Diseño Corporativo Unificado Premium",
-                            "Catálogo de redes: TikTok, FB, IG, LinkedIn",
-                            "1 Actualización trimestral incluida",
-                            "Suma perfiles de tu equipo (+Bs78 c/u)"
+                            "Todo lo de la cuenta Gratis",
+                            "Catálogo ampliado a 15 productos",
+                            "Pedidos: Sí, hasta 150/mes",
+                            "Gestión de pedidos por estado y por fecha",
+                            "Dashboard de métricas completo",
+                            "Hasta 2 números de WhatsApp",
+                            "Insignia 'Verificado' incluida",
+                            "Soporte directo por WhatsApp"
+                        ]
+                    }
+                ],
+
+                planesTarjetas: [
+                    {
+                        nombre: "Gratis",
+                        precio: "Bs0",
+                        freq: "/gratis",
+                        desc: "Comienza a tener presencia en internet",
+                        features: [
+                            "Perfil público en la Red Tarjetoso",
+                            "Catálogo de hasta 5 productos",
+                            "Pedidos: No disponible",
+                            "Hasta 2 números de WhatsApp",
+                            "Dashboard de métricas: No",
+                            "Insignia 'Verificado': No",
+                            "Soporte: Comunidad / FAQ"
+                        ]
+                    },
+                    {
+                        nombre: "Premium",
+                        precio: "US$5",
+                        freq: "/mes",
+                        desc: "La máxima potencia para tu negocio",
+                        features: [
+                            "Todo lo de la cuenta Gratis",
+                            "Catálogo ampliado a 15 productos",
+                            "Pedidos: Sí, hasta 150/mes",
+                            "Gestión de pedidos por estado y por fecha",
+                            "Dashboard de métricas completo",
+                            "Hasta 2 números de WhatsApp",
+                            "Insignia 'Verificado' incluida",
+                            "Soporte directo por WhatsApp"
                         ]
                     }
                 ],
@@ -550,6 +643,40 @@
                 titMenus: "Menús Digitales e Interactivos",
                 descMenus: "Lleva tu restaurante o negocio al siguiente nivel. Tus clientes escanean el código QR, ven tu menú interactivo, seleccionan sus productos y realizan pedidos directo a tu WhatsApp o sistema de gestión, reduciendo tiempos de espera y optimizando tus ventas sin comisiones.",
                 ctaInfoMenus: "Asesoría para mi Menú",
+
+                planesMenus: [
+                    {
+                        nombre: "Gratis",
+                        precio: "Bs0",
+                        freq: "/gratis",
+                        desc: "Comienza a tener presencia en internet",
+                        features: [
+                            "Perfil público en la Red Tarjetoso",
+                            "Catálogo de hasta 5 productos",
+                            "Pedidos: No disponible",
+                            "Hasta 2 números de WhatsApp",
+                            "Dashboard de métricas: No",
+                            "Insignia 'Verificado': No",
+                            "Soporte: Comunidad / FAQ"
+                        ]
+                    },
+                    {
+                        nombre: "Premium",
+                        precio: "US$5",
+                        freq: "/mes",
+                        desc: "La máxima potencia para tu negocio",
+                        features: [
+                            "Todo lo de la cuenta Gratis",
+                            "Catálogo ampliado a 15 productos",
+                            "Pedidos: Sí, hasta 150/mes",
+                            "Gestión de pedidos por estado y por fecha",
+                            "Dashboard de métricas completo",
+                            "Hasta 2 números de WhatsApp",
+                            "Insignia 'Verificado' incluida",
+                            "Soporte directo por WhatsApp"
+                        ]
+                    }
+                ],
 
                 tituloEquipo: "Los Arquitectos de tu Sistema",
                 descEquipo: "Acompañamiento técnico de alto nivel en cada fase."
@@ -703,6 +830,7 @@
 
             setHTML('ui-tit-spinjob', GLOBAL_CONFIG.textosUI.titRed);
             setHTML('ui-desc-spinjob', GLOBAL_CONFIG.textosUI.descRed);
+            setHTML('content-tarjetoso-planes', generarPlanesHTML(GLOBAL_CONFIG.textosUI.planesRed, "Red Tarjetoso"));
 
             setHTML('ui-tit-tarjetas', GLOBAL_CONFIG.textosUI.titTarjetas);
             setHTML('ui-desc-tarjetas', GLOBAL_CONFIG.textosUI.descTarjetas);
@@ -712,6 +840,7 @@
             setHTML('ui-tit-menus', GLOBAL_CONFIG.textosUI.titMenus);
             setHTML('ui-desc-menus', GLOBAL_CONFIG.textosUI.descMenus);
             setHTML('ui-cta-info-menus', GLOBAL_CONFIG.textosUI.ctaInfoMenus);
+            setHTML('content-menus-planes', generarPlanesHTML(GLOBAL_CONFIG.textosUI.planesMenus, "Menús Digitales"));
 
 
 
@@ -809,7 +938,9 @@
             else { slides[currentSlide].classList.remove('prev-slide'); }
 
             // Forzar el reseteo de tabs al cambiar de vista
+            toggleTab('tarjetoso', 'info');
             toggleTab('tarjetas', 'info');
+            toggleTab('menus', 'info');
             currentMenuSlide = 0;
             updateMenuCarousel();
 
